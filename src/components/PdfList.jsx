@@ -12,7 +12,7 @@ function PdfList({ setReload, reload }) {
 					`https://project-crs-server-1.onrender.com/api/v1/lists/yearlist/mht-cet`
 				);
 				const yearData = await yearList.json();
-				// console.log(Object.keys(yearData.data));
+				console.log(Object.keys(yearData.data));
 				const arrOfYears = Object.keys(yearData.data);
 				const data = [];
 				let response = null;
@@ -28,6 +28,7 @@ function PdfList({ setReload, reload }) {
 							}
 							let pdfArrOfYear = await response.json();
 							data.push(...pdfArrOfYear);
+							console.log(year, "data fetched")
 						}
 						res();
 					});
@@ -35,7 +36,7 @@ function PdfList({ setReload, reload }) {
 
 				await getPdfList();
 
-				// console.log(data);
+				console.log(data);
 				setPdfs(data);
 			} catch (error) {
 				console.error("Error fetching PDFs:", error);
