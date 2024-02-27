@@ -8,13 +8,34 @@ function PdfList({ setReload, reload }) {
 	useEffect(() => {
 		const fetchPdfs = async () => {
 			try {
-				const response = await fetch(
-					`${SERVER_URL}/api/v1/lists/pdfList`
+				const yearList = await fetch(
+					`https://project-crs-server-1.onrender.com/api/v1/lists/yearlist/mht-cet`
 				);
-				if (!response.ok) {
-					throw new Error("Failed to fetch PDFs");
-				}
-				const data = await response.json();
+				const yearData = await yearList.json();
+				// console.log(Object.keys(yearData.data));
+				const arrOfYears = Object.keys(yearData.data);
+				const data = [];
+				let response = null;
+
+				const getPdfList = () => {
+					return new Promise(async (res, rej) => {
+						for(let year of arrOfYears) {
+							response = await fetch(
+								`${SERVER_URL}/api/v1/lists/pdfList/${year}`
+							);
+							if (!response.ok) {
+								throw new Error("Failed to fetch PDFs");
+							}
+							let pdfArrOfYear = await response.json();
+							data.push(...pdfArrOfYear);
+						}
+						res();
+					});
+				};
+
+				await getPdfList();
+
+				// console.log(data);
 				setPdfs(data);
 			} catch (error) {
 				console.error("Error fetching PDFs:", error);
@@ -41,7 +62,7 @@ function PdfList({ setReload, reload }) {
 				`${SERVER_URL}/api/v1/pdf/delete/${year}/${round}/${exam}/${name}`
 			);
 			setReload((flag) => !flag);
-			console.log(response);
+			// console.log(response);
 		} catch (err) {
 			console.log("Error Deleting pdf", err);
 		}
