@@ -10,7 +10,7 @@
 
 :root {
   --file-background-color: linear-gradient(135deg, #e8f5fe, #00fff7);
-  --heading-color: #273b6b;
+  --heading-color: #001a1a;
   --form-background-color: #f7f7f7;
   --shadow: 0px 0px 56px rgba(69, 69, 69, .2);
   --border: 3px solid #00ffff;
@@ -110,7 +110,7 @@ h3 {
 
 input::file-selector-button {
   font-weight: bold;
-  background-color: rgba(5, 0, 70, 0.88);
+  background-color: #001a1a;
   color: rgb(255, 255, 255);
   padding: 0.5em;
   border: none;
