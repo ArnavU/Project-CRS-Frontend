@@ -69,6 +69,7 @@
   text-align: center;
   padding: 5px;
   color: var(--heading-color);
+  margin-bottom: 12px;
 
 }
 
@@ -150,10 +151,14 @@ input::file-selector-button {
   font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
+  margin-top: 30px;
 }
 
 .file-upload-div button:hover {
-  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.16));
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.26));
+  background: #001a1a;
+  color: white;
+  transition-duration: 0.2s;
 }
 
 
@@ -166,6 +171,7 @@ input::file-selector-button {
   flex-wrap: wrap;
   /* margin: 5px; */
   justify-content: space-evenly;
+  padding-right: 25px;
 }
 
 .pdf-card {
@@ -177,6 +183,8 @@ input::file-selector-button {
   margin-left: 25px;
   min-width: 400px;
 }
+
+
 
 .pdf-card button {
   padding: 10px 20px;
@@ -191,7 +199,7 @@ input::file-selector-button {
 }
 
 .pdf-card button:hover {
-  background-color: black;
+  background-color: #001a1a;
   color: white;
 }
 
@@ -236,6 +244,23 @@ input::file-selector-button {
   100% {
     transform: scale(0.95);
     animation-timing-function: ease-in-out;
+  }
+
+}
+
+@media (orientation: portrait) {
+  .pdf-card {
+    margin-top: 25px;
+    background: #f2f2f2b8;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    margin-left: 25px;
+    min-width: auto;
+  }
+
+  .file-upload-div {
+    width: 80%;
   }
 
 }
