@@ -1,22 +1,30 @@
-import "../index.css";
+import "../AdminIndex.css";
 import { IoCloudyNightSharp } from "react-icons/io5";
 import { useState } from "react";
 
 const ThemeToggle = () => {
+  let [isDark, setIsDark] = useState(false);
+
   const setDarkMode = () => {
     document.querySelector("body").setAttribute("data-theme", "dark");
+    setIsDark(true);
   };
   const setLightMode = () => {
     document.querySelector("body").setAttribute("data-theme", "light");
+    setIsDark(false);
   };
 
   const toggleTheme = (e) => {
-    console.log(e);
+    if (isDark) {
+      setLightMode();
+    } else {
+      setDarkMode();
+    }
   };
   return (
-    <div className="themediv" onClick={toggleTheme}>
+    <button className="themediv" onClick={toggleTheme}>
       <IoCloudyNightSharp className="darkthemeicon" />
-    </div>
+    </button>
   );
 };
 

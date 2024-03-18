@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SERVER_URL } from "../utils/constants.js";
 import axios from "axios";
-import "../index.css";
+import "../AdminIndex.css";
 
 function FileUpload({ setReload }) {
   const [selectedFile, setSelectedFile] = useState(null);

@@ -6,37 +6,65 @@
 
 .labelofexam {
   margin-left: 33px;
+  color: var(--exam-label-color);
 }
 
+
+
+
 :root {
-  --file-background-color: linear-gradient(135deg, #e8f5fe, #00fff7);
+  --body-bg-color: #00ffff;
+  --file-background-color: #00fff700;
   --heading-color: #001a1a;
   --form-background-color: #f7f7f7;
   --shadow: 0px 0px 56px rgba(69, 69, 69, .2);
   --border: 3px solid #00ffff;
-  --button-color-before-hover: #e1fffe;
+
+
+  --button-color-before-hover: #ffffff;
   --button-color-after-hover: #000000;
   --button-text-after-hover: rgb(253, 219, 150);
   --button-border-after-hover: 5px solid #000000;
+  --file-upload-div-color: #ffffff6e;
+  --admin-panel-heading-color: #001a1a;
+  --p-color: #001a1a;
+  --drag-n-drop-heading: #001a1a;
+  --exam-label-color: black;
+
+
+  --bg-color-of-theme-toggle: black;
+  --icon-color-of-theme-toggle: rgb(255, 255, 255);
 
 }
 
 [data-theme="dark"] {
-  --file-background-color: linear-gradient(135deg, #595959, #000000);
-  --heading-color: #9a9a9a;
+
+  --body-bg-color: #000000;
+  --file-background-color: #00000000;
+  --heading-color: #ffffff;
   --form-background-color: #f7f7f7;
-  --shadow: 0px 0px 56px rgba(69, 69, 69, .2);
+  --shadow: 0px 0px 56px rgba(0, 0, 0, 0.2);
   --border: 3px solid #00ffff;
   --button-color-before-hover: #e1fffe;
   --button-color-after-hover: #000000;
   --button-text-after-hover: rgb(253, 219, 150);
   --button-border-after-hover: 5px solid #000000;
+  --file-upload-div-color: rgb(28, 28, 28);
+  --admin-panel-heading-color: white;
+  --p-color: white;
+  --drag-n-drop-heading: #001a1a;
+  --exam-label-color: white;
+
+
+  --bg-color-of-theme-toggle: rgb(255, 255, 255);
+  --icon-color-of-theme-toggle: rgb(0, 0, 0);
 }
 
 
 ::-webkit-scrollbar {
   width: 7px;
   border-radius: 20px;
+
 
 }
 
@@ -53,6 +81,11 @@
   background: #000000;
 }
 
+body {
+  background-color: var(--body-bg-color);
+  transition: 0.2s;
+  animation-duration: 0.2s;
+}
 
 .screen-div {
   font-size: 1.5rem;
@@ -68,10 +101,11 @@
   margin: auto;
   text-align: center;
   padding: 5px;
-  color: var(--heading-color);
+  color: var(--admin-panel-heading-color);
   margin-bottom: 12px;
 
 }
+
 
 .file-upload-div {
   box-shadow: var(--shadow);
@@ -81,7 +115,7 @@
   align-items: center;
   min-height: 50%;
   width: 50%;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--file-upload-div-color);
   margin: auto;
   border-radius: 40px;
   padding: 17px;
@@ -90,6 +124,10 @@
 h3 {
   margin-top: 22px;
   color: var(--heading-color);
+}
+
+p {
+  color: var(--p-color);
 }
 
 .choosefile-div {
@@ -106,6 +144,10 @@ h3 {
   padding: 5px 10px;
   box-shadow: 0px 0px 56px rgba(69, 69, 69, .2);
   padding-bottom: 0px;
+}
+
+.choosefile-div h3 {
+  color: var(--drag-n-drop-heading);
 }
 
 input::file-selector-button {
@@ -167,7 +209,7 @@ input::file-selector-button {
 
 .pdf-list {
   display: flex;
-  background: linear-gradient(72deg, #e8f5fe, #00fff7);
+  background: var(--file-background-color);
   flex-wrap: wrap;
   /* margin: 5px; */
   justify-content: space-evenly;
@@ -176,12 +218,13 @@ input::file-selector-button {
 
 .pdf-card {
   margin-top: 25px;
-  background: #f2f2f2b8;
+  margin-left: 25px;
+  background: var(--file-upload-div-color);
   padding: 20px;
   border-radius: 20px;
   box-shadow: var(--shadow);
-  margin-left: 25px;
   min-width: 400px;
+  backdrop-filter: blur(25px);
 }
 
 
@@ -191,6 +234,7 @@ input::file-selector-button {
   border-radius: 15px;
   box-shadow: var(--shadow);
   border: none;
+  background-color: var(--button-color-before-hover);
   margin: 10px 10px 0 0;
   cursor: pointer;
   transition-duration: 0.2s;
@@ -199,27 +243,20 @@ input::file-selector-button {
 }
 
 .pdf-card button:hover {
-  background-color: #001a1a;
+  background-color: var(--button-color-after-hover);
   color: white;
 }
 
-.delete-pdf-button {
-  background-color: white;
-  border: 3px solid rgb(255, 0, 0);
-}
 
-.view-pdf-button {
-  border: 3px solid rgb(0, 255, 102);
-}
 
 .themediv {
   position: fixed;
   right: 20px;
   bottom: 20px;
   border-radius: 20px;
-  background-color: rgb(0, 0, 0);
+  background-color: var(--bg-color-of-theme-toggle);
   border: none;
-  color: wheat;
+  color: var(--icon-color-of-theme-toggle);
   padding: 20px;
   cursor: pointer;
   animation: animateWhenTouch 0.2s ease-in-out
@@ -248,10 +285,70 @@ input::file-selector-button {
 
 }
 
+
+
+
+
+/* ################################# #PDF #Shimmer #######################*/
+
+
+.pdf-list-shimmer {
+  display: flex;
+  background: linear-gradient(72deg, #e8f5fe, #00fff7);
+  flex-wrap: wrap;
+  /* margin: 5px; */
+  justify-content: space-evenly;
+  padding-right: 25px;
+}
+
+.pdf-card-shimmer {
+  margin-top: 25px;
+  margin-left: 25px;
+  margin-bottom: 25px;
+  background: linear-gradient(-45deg, #d1d1d11c, #ffffff7c, #d1d1d11c);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  min-width: 400px;
+  background-size: 300%;
+  background-position-x: 100%;
+  animation: shimmer 2s infinite;
+}
+
+.pdf-card-shimmer p,
+.pdf-card-shimmer h3,
+.pdf-card-shimmer button {
+  color: #6a6a6a00;
+  background-color: #ffffff63;
+  border-radius: 10px;
+  margin: 4px;
+  padding: 2px;
+}
+
+
+.pdf-card-shimmer button {
+  padding: 10px 20px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  border: none;
+  margin: 10px 10px 0 0;
+  cursor: pointer;
+  transition-duration: 0.2s;
+  font-weight: bolder;
+  font-size: 1.1rem;
+}
+
+
+@keyframes shimmer {
+  to {
+    background-position-x: 0%
+  }
+}
+
+
 @media (orientation: portrait) {
   .pdf-card {
     margin-top: 25px;
-    background: #f2f2f2b8;
     padding: 20px;
     border-radius: 20px;
     box-shadow: var(--shadow);
@@ -261,6 +358,10 @@ input::file-selector-button {
 
   .file-upload-div {
     width: 80%;
+  }
+
+  .pdf-card-shimmer {
+    min-width: auto;
   }
 
 }

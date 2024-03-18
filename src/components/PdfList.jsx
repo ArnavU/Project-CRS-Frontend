@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { SERVER_URL } from "../utils/constants";
 import axios from "axios";
+import PdfListShimmer from "./PdfListShimmer";
 
 function PdfList({ setReload, reload }) {
   const [pdfs, setPdfs] = useState([]);
@@ -35,7 +36,6 @@ function PdfList({ setReload, reload }) {
           }
         }
 
-        console.log(data);
         setPdfs(data);
       } catch (error) {
         console.error("Error fetching year list:", error);
@@ -67,25 +67,30 @@ function PdfList({ setReload, reload }) {
     }
   };
 
+  // Conditional rendering based on pdfs length
   return (
     <div className="pdf-list">
-      {pdfs.map((pdf, index) => (
-        <div key={index} className="pdf-card">
-          <h3>{pdf.name}</h3>
-          <p>Year: {pdf.year}</p>
-          <p>Round: {pdf.round}</p>
-          <p>Exam: {pdf.exam}</p>
-          <button className="view-pdf-button" onClick={() => openPdf(pdf)}>
-            View
-          </button>
-          <button
-            className="delete-pdf-button"
-            onClick={() => deletePdf(pdf.year, pdf.round, pdf.exam, pdf.name)}
-          >
-            Delete
-          </button>
-        </div>
-      ))}
+      {pdfs.length ? (
+        pdfs.map((pdf, index) => (
+          <div key={index} className="pdf-card">
+            <h3>{pdf.name}</h3>
+            <p>Year: {pdf.year}</p>
+            <p>Round: {pdf.round}</p>
+            <p>Exam: {pdf.exam}</p>
+            <button className="view-pdf-button" onClick={() => openPdf(pdf)}>
+              View
+            </button>
+            <button
+              className="delete-pdf-button"
+              onClick={() => deletePdf(pdf.year, pdf.round, pdf.exam, pdf.name)}
+            >
+              Delete
+            </button>
+          </div>
+        ))
+      ) : (
+        <PdfListShimmer />
+      )}
     </div>
   );
 }
