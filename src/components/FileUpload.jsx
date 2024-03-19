@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SERVER_URL } from "../utils/constants.js";
 import axios from "axios";
-import "../AdminIndex.css";
+import "../Styles/AdminIndex.css";
 
 function FileUpload({ setReload }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -62,21 +62,23 @@ function FileUpload({ setReload }) {
           <input type="file" draggable="true" onChange={handleFileChange} />
           <br />
         </div>
+
         <div className="fileupload-options-div">
-          <label htmlFor="exam-options" className="labelofexam">
-            Exam:
-          </label>
-          <select
-            name="exam-options"
-            id="exam-options"
-            onChange={handleExamChange}
-          >
-            <option value="mht-cet">MHT-CET</option>
-            <option disabled={true} value="jee">
-              JEE
-            </option>
-          </select>
-          <br />
+          <div className="admin-exam-option">
+            <label htmlFor="exam-options" className="labelofexam">
+              Exam:
+            </label>
+            <select
+              name="exam-options"
+              id="exam-options"
+              onChange={handleExamChange}
+            >
+              <option value="mht-cet">MHT-CET</option>
+              <option disabled={true} value="jee">
+                JEE
+              </option>
+            </select>
+          </div>
           <input
             type="text"
             placeholder="Year"

@@ -1,30 +1,32 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: math, serif;
+  /* font-family: math, serif; */
 }
-
-.labelofexam {
-  margin-left: 33px;
-  color: var(--exam-label-color);
-}
-
-
 
 
 :root {
+  /* body colors */
   --body-bg-color: #00ffff;
   --file-background-color: #00fff700;
   --heading-color: #001a1a;
   --form-background-color: #f7f7f7;
   --shadow: 0px 0px 56px rgba(69, 69, 69, .2);
   --border: 3px solid #00ffff;
+  --ip-or-select-bg-color: rgb(245 245 245);
 
 
-  --button-color-before-hover: #ffffff;
-  --button-color-after-hover: #000000;
+  /* button before hover */
+  --button-bgcolor-before-hover: #ffffff;
+  --button-text-before-hover: rgb(13, 9, 0);
+  /* button after hover */
+  --button-bgcolor-after-hover: #000000;
   --button-text-after-hover: rgb(253, 219, 150);
   --button-border-after-hover: 5px solid #000000;
+
+
+
+  /* for admin panel */
   --file-upload-div-color: #ffffff6e;
   --admin-panel-heading-color: #001a1a;
   --p-color: #001a1a;
@@ -32,6 +34,9 @@
   --exam-label-color: black;
 
 
+
+
+  /*colors for theme toggle icon*/
   --bg-color-of-theme-toggle: black;
   --icon-color-of-theme-toggle: rgb(255, 255, 255);
 
@@ -39,16 +44,28 @@
 
 [data-theme="dark"] {
 
+  /* body colors */
   --body-bg-color: #000000;
   --file-background-color: #00000000;
   --heading-color: #ffffff;
   --form-background-color: #f7f7f7;
   --shadow: 0px 0px 56px rgba(0, 0, 0, 0.2);
   --border: 3px solid #00ffff;
-  --button-color-before-hover: #e1fffe;
-  --button-color-after-hover: #000000;
+
+  --ip-or-select-bg-color: rgb(245 245 245);
+
+
+  /* button before hover */
+  --button-bgcolor-before-hover: #ffffff;
+  --button-text-before-hover: rgb(13, 9, 0);
+  /* button after hover */
+  --button-bgcolor-after-hover: #000000;
   --button-text-after-hover: rgb(253, 219, 150);
   --button-border-after-hover: 5px solid #000000;
+
+
+
+  /* for admin panel */
   --file-upload-div-color: rgb(28, 28, 28);
   --admin-panel-heading-color: white;
   --p-color: white;
@@ -56,9 +73,30 @@
   --exam-label-color: white;
 
 
-  --bg-color-of-theme-toggle: rgb(255, 255, 255);
+  /*colors for theme toggle icon*/
+  --bg-color-of-theme-toggle: white;
   --icon-color-of-theme-toggle: rgb(0, 0, 0);
 }
+
+.admin-exam-option {
+  display: flex;
+  display: flex;
+  flex-wrap: unset;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: flex-end;
+  margin-left: 27px;
+}
+
+.labelofexam {
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 20px; */
+  /* margin-left: 33px; */
+  color: var(--exam-label-color);
+}
+
 
 
 ::-webkit-scrollbar {
@@ -159,8 +197,7 @@ input::file-selector-button {
   border-radius: 10px;
   cursor: pointer;
   box-shadow: var(--shadow);
-  margin-left: 25px;
-  margin-top: 10px;
+  margin: 10px 10px 10px 10px;
 }
 
 .fileupload-options-or-buttons-div {
@@ -185,7 +222,6 @@ input::file-selector-button {
 
 
 .file-upload-div button {
-  background: #e8e8e8;
   padding: 8px 13px;
   border: none;
   margin: 13px;
@@ -194,13 +230,18 @@ input::file-selector-button {
   font-weight: bold;
   cursor: pointer;
   margin-top: 30px;
+  background: var(--button-bgcolor-before-hover);
+  color: var(--button-text-before-hover);
+
 }
 
 .file-upload-div button:hover {
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.26));
-  background: #001a1a;
-  color: white;
+  background: var(--button-bgcolor-after-hover);
+  color: var(--button-text-after-hover);
   transition-duration: 0.2s;
+  box-shadow: var(--shadow);
+
 }
 
 
@@ -234,7 +275,8 @@ input::file-selector-button {
   border-radius: 15px;
   box-shadow: var(--shadow);
   border: none;
-  background-color: var(--button-color-before-hover);
+  background-color: var(--button-bgcolor-before-hover);
+  color: var(--button-text-before-hover);
   margin: 10px 10px 0 0;
   cursor: pointer;
   transition-duration: 0.2s;
@@ -243,8 +285,8 @@ input::file-selector-button {
 }
 
 .pdf-card button:hover {
-  background-color: var(--button-color-after-hover);
-  color: white;
+  background-color: var(--button-bgcolor-after-hover);
+  color: var(--button-text-after-hover);
 }
 
 
