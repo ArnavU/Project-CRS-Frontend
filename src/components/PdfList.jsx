@@ -9,7 +9,7 @@ function PdfList({ setReload, reload }) {
 		const fetchPdfs = async () => {
 			try {
 				const yearList = await fetch(
-					`https://project-crs-server-1.onrender.com/api/v1/lists/yearlist/mht-cet`
+					`${SERVER_URL}/api/v1/lists/yearlist/mht-cet`
 				);
 				const yearData = await yearList.json();
 				console.log(Object.keys(yearData.data));
