@@ -1,5 +1,5 @@
 import React from "react";
-import "../AdminIndex.css";
+import "../Styles/AdminIndex.css";
 
 function PdfListShimmer({numbers: num}) {
 	return num && (

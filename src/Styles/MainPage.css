@@ -1,0 +1,683 @@
+:root {
+    /* body colors */
+    --body-bg-color: #00ffff;
+    --file-background-color: #00fff700;
+    --heading-color: #001a1a;
+    --form-background-color: #f7f7f7;
+    --shadow: 0px 0px 56px rgba(69, 69, 69, .2);
+    --border: 3px solid #00ffff;
+    --ip-or-select-bg-color: rgb(245 245 245);
+
+
+    /* button before hover */
+    --button-bgcolor-before-hover: #ffffff;
+    --button-text-before-hover: rgb(13, 9, 0);
+    /* button after hover */
+    --button-bgcolor-after-hover: #000000;
+    --button-text-after-hover: rgb(253, 219, 150);
+    --button-border-after-hover: 5px solid #000000;
+
+
+
+    /* for admin panel */
+    --file-upload-div-color: #ffffff6e;
+    --admin-panel-heading-color: #001a1a;
+    --p-color: #001a1a;
+    --drag-n-drop-heading: #001a1a;
+    --exam-label-color: black;
+
+
+    /*colors for theme toggle icon*/
+    --bg-color-of-theme-toggle: black;
+    --icon-color-of-theme-toggle: rgb(255, 255, 255);
+
+
+    /* light colors for table */
+    --th-bg-color: rgb(255, 255, 255);
+    --th-text-color: rgb(0, 0, 0);
+    --th-bg-color-hover: rgba(255, 255, 255, 0.657);
+    --th-text-color-hover: rgb(23, 23, 23);
+    --table-border-color: #e2e2e2;
+    --sidebar-header-bg: white;
+    --sidebar-icon-color: black;
+    --select-option-bg-color: white;
+    --select-option-text-color: black;
+    --label-color: black;
+
+}
+
+[data-theme="dark"] {
+
+    /* body colors */
+    --body-bg-color: #000000;
+    --file-background-color: #00000091;
+    --heading-color: #ffffff;
+    --form-background-color: #f7f7f7;
+    /* --form-text-color: #ffffff; */
+    --shadow: 0px 0px 56px rgba(0, 0, 0, 0.2);
+    --border: 3px solid #00ffff;
+    --ip-or-select-bg-color: rgb(245 245 245);
+
+
+    /* button before hover */
+    --button-bgcolor-before-hover: #ffffff;
+    --button-text-before-hover: rgb(13, 9, 0);
+    /* button after hover */
+    --button-bgcolor-after-hover: #000000;
+    --button-text-after-hover: rgb(253, 219, 150);
+    --button-border-after-hover: 5px solid #000000;
+
+
+
+    /* for admin panel */
+    --file-upload-div-color: rgb(28, 28, 28);
+    --admin-panel-heading-color: white;
+    --p-color: white;
+    --drag-n-drop-heading: #001a1a;
+    --exam-label-color: white;
+
+
+    /*colors for theme toggle icon*/
+    --bg-color-of-theme-toggle: white;
+    --icon-color-of-theme-toggle: rgb(0, 0, 0);
+
+
+    /* dark for table */
+    --th-bg-color: rgb(35, 35, 35);
+    --th-text-color: rgb(255, 255, 255);
+    --th-bg-color-hover: rgba(0, 0, 0, 0.579);
+    --th-text-color-hover: white;
+    --table-border-color: #525252;
+
+    --sidebar-icon-color: white;
+    --sidebar-header-bg: white;
+
+    --select-option-bg-color: rgb(255, 255, 255);
+    --select-option-text-color: rgb(85, 85, 85);
+
+    --label-color: rgb(255, 255, 255);
+}
+
+
+
+
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 7px;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #000000;
+}
+
+/* Main container */
+.maindiv {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+
+/* Table container */
+.table-container {
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+/* Table styles */
+table {
+    margin: 20px 250px;
+    border-collapse: collapse;
+    box-shadow: var(--shadow);
+    background-color: var(--table-border-color);
+    border-radius: 15px;
+    border: 5px solid #000000;
+    overflow: hidden;
+    transition: width 0.5s, margin 0.5s;
+    /* Transition for smooth animation */
+}
+
+th,
+td {
+    padding: 15px;
+    text-align: left;
+    border: 5px solid var(--table-border-color);
+}
+
+th {
+    background-color: var(--th-bg-color);
+    color: var(--th-text-color);
+}
+
+.highlight {
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+th:hover,
+tr:hover {
+    background-color: var(--th-bg-color-hover);
+    color: var(--th-text-color-hover);
+}
+
+/* Call to action container */
+/* .cta-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.cta-btn {
+    background-color: #3498db;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-btn:hover {
+    background-color: #2980b9;
+}
+
+.lout {
+    padding: 10px 20px;
+    background-color: red;
+    border-radius: 20%;
+}
+
+
+.flash-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+} 
+.container {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+*/
+
+
+label {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: bold;
+    color: var(--label-color);
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background-color: rgb(1 1 1 / 43%);
+    border-radius: 10px;
+    border: none;
+    font-size: 1.2rem;
+}
+
+/* Button styles */
+.mainpage-button {
+    background-color: #e1fffe;
+    color: #fff;
+    padding: 10px;
+    border: 5px solid #66ffeb;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #11222f;
+    transition: 0.1s;
+    font-size: 1.2rem;
+}
+
+.mainpage-button:hover,
+.form button:active,
+.form button:focus {
+    background-color: #000000;
+    color: rgb(253, 219, 150);
+    border: 5px solid #000000;
+}
+
+/* Sidebar styles */
+.sidebar {
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: -450px;
+    width: 450px;
+    min-height: 100%;
+    transition: all 0.5s ease;
+    margin-left: 6px;
+    z-index: 20;
+    background: var(--file-upload-div-color);
+    color: var(--form-text-color);
+    padding: 10px 10px 10px 10px;
+    border-radius: 25px;
+    margin-top: 8px;
+    backdrop-filter: blur(200px);
+    box-shadow: var(--shadow);
+}
+
+
+
+.sidebar header {
+    z-index: 20;
+    font-size: 22px;
+    color: #09193c;
+    line-height: 70px;
+    text-align: center;
+    background: #68e1ff82;
+    user-select: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* border: 2px solid #00ffff; */
+    border-radius: 20px;
+    margin-top: 4px;
+    margin-bottom: 5px;
+    background: var(--sidebar-header-bg);
+}
+
+/* Sidebar toggle styles */
+#check {
+    display: none;
+}
+
+label #btn,
+label #cancel {
+    z-index: 1;
+    position: absolute;
+    border-radius: 3px;
+    cursor: pointer;
+    filter: drop-shadow(0 0 2px rgb(52, 52, 52))
+}
+
+label #btn {
+    left: 40px;
+    top: 25px;
+    font-size: 35px;
+    color: var(--sidebar-icon-color);
+    padding: 6px 12px;
+    transition: all .5s ease;
+}
+
+label #cancel {
+    z-index: 1111;
+    left: -395px;
+    top: 25px;
+    font-size: 58px;
+    color: black;
+    padding: 4px 9px;
+    transition: all .5s ease;
+}
+
+#check:checked~.sidebar {
+    left: 0;
+
+}
+
+#check:checked~label #btn {
+    left: 450px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#check:checked~label #cancel {
+    left: 385px;
+}
+
+#check:checked~table {
+    width: calc(100% - 250px);
+    /* Adjust table width when sidebar is shown */
+    margin: 20px 0 20px 250px;
+    /* Adjust margin when sidebar is shown */
+}
+
+/* Bottom button styles */
+.bottom-btns {
+    display: flex;
+    justify-content: center;
+}
+
+#check:checked~.bottom-btns {
+    margin-left: 450px;
+    transition: all 3s;
+}
+
+.bottom-btns button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.bottom-btns button:hover {
+    background-color: #62e0ff;
+    color: #fff;
+}
+
+/* Logout button styles */
+.lout {
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.lout:hover {
+    background-color: #c0392b;
+}
+
+/* Print button styles */
+#printbtn {
+    background-color: rgb(168 147 0 / 30%);
+    color: rgb(93, 82, 0);
+    border: 2px solid rgb(143 136 0);
+    font: message-box;
+    font-weight: bold;
+}
+
+
+
+#printbtn:hover {
+    background-color: rgb(168 147 0 / 50%);
+}
+
+/* Logout button styles */
+#logoutt {
+    font: message-box;
+    background-color: rgba(255, 0, 0, 0.3);
+    border: 2px solid red;
+    color: red;
+    font-weight: bold;
+}
+
+#logoutt:hover {
+    font: message-box;
+    background-color: rgba(172, 169, 169, 0.4);
+    border: 2px solid rgb(255, 0, 0);
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+}
+
+#check:checked~.table-container {
+    /* filter: blur(5px); */
+    transition-duration: 0.7s;
+    /* blur effect when sidebar is shown */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ############################# querypage CSS ############################ */
+
+/* General styling */
+
+.queryform-div {
+    display: flex;
+}
+
+.heading {
+    text-align: center;
+    color: var(--heading-color);
+    margin-bottom: 12px;
+}
+
+.form-container {
+    font-family: serif;
+    background: var(--file-upload-div-color);
+    margin: auto;
+    min-height: 50vh;
+    margin-top: 100px;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 35px;
+    /* border: 4px solid #00ffde; */
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(44px);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--label-color);
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    background-color: var(--ip-or-select-bg-color);
+    border-radius: 10px;
+    border: none;
+    font-size: 1.2rem;
+}
+
+.hide {
+    transition: all ease 2s;
+}
+
+.button-container {
+    width: 100%;
+    text-align: center;
+}
+
+/* Button styling */
+.querypage-button {
+    margin: 10px auto;
+    /* Adjusted */
+    text-transform: uppercase;
+    outline: 0;
+    background: #e1fffe;
+    width: 100%;
+    border: 0;
+    padding: 13px;
+    color: #11222f;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: 'ABCDiatype';
+    border-radius: 10px;
+    transition: background-color 0.1s;
+    cursor: pointer;
+    /* border: 2px solid #66ffeb; */
+}
+
+.querypage-button:hover {
+    background-color: #000000;
+    color: rgb(255, 233, 188);
+    border: none;
+    /* border: 2px solid #ffffff; */
+}
+
+/* Logout button */
+.lout {
+    padding: 10px 20px;
+    background-color: red;
+    border-radius: 20%;
+}
+
+/* Button container styling */
+.btn {
+    display: flex;
+    justify-content: center;
+}
+
+/* Form row */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Form group */
+.form-group {
+    width: 100%;
+    margin-right: 1%;
+}
+
+/* Or text */
+.or-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 0 10px;
+    color: var(--label-color);
+}
+
+
+
+
+/* ############################# Login Page CSS ############################ */
+/* ############################# Signup Page CSS ############################ */
+
+
+
+.loginMenu {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+    text-align: center;
+    background-repeat: no-repeat;
+}
+
+.loginHeading {
+    color: var(--heading-color);
+    font-size: 24px;
+    font-weight: 100;
+    margin-bottom: 20px;
+}
+
+.login-form-div {
+    position: relative;
+    z-index: 1;
+    background: var(--file-upload-div-color);
+    background-size: cover;
+    background-repeat: no-repeat;
+    max-width: 360px;
+    backdrop-filter: blur(1px);
+    margin: 0 auto 0px;
+    padding: 45px;
+    text-align: center;
+    border-radius: 30px;
+    box-shadow: var(--shadow);
+    /* border: var(--border); */
+}
+
+.login-form-div input {
+    outline: 0;
+    background: #000000cf;
+    color: rgb(255, 255, 255);
+    width: 100%;
+    border: none;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    border-radius: 10px;
+}
+
+.login-form-div input:focus {
+    border-color: #3498db;
+}
+
+.login-button {
+    background-color: #e1fffe;
+    color: #fff;
+    padding: 10px;
+    border: 5px solid #66ffeb;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #11222f;
+    transition: 0.1s;
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+.login-button:hover,
+.form button:active,
+.form button:focus {
+    background-color: var(--button-bgcolor-after-hover);
+    color: var(--button-text-after-hover);
+    border: 5px solid #000000;
+}
+
+.login-form-div .message {
+    margin-top: 15px;
+    color: #515151;
+    font-size: 12px;
+}
+
+.login-form-div .message a {
+    color: #000000;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.login-form-div .registerForm {
+    display: none;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
