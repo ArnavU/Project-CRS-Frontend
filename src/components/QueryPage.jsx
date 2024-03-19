@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import MainPage from "./MainPage";
 import "../Styles/MainPage.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/authContext";
 let collegeListURL =
   "https://project-crs-server-1.onrender.com/api/v1/lists/colleges/cet";
 let branchListURL =
@@ -10,9 +11,13 @@ let categoryURL =
   "https://project-crs-server-1.onrender.com/api/v1/lists/categories/cet/2022";
 
 const QueryPage = () => {
+  const {userLoggedIn} = useAuth();
+  const navigate = useNavigate();
+
+  
+
   // let queryString = "Hi";
   const [queryString, setQueryString] = useState("Hi");
-  const navigate = useNavigate();
   //Data fetched from API
   const [colleges, setColleges] = useState([]);
   const [branches, setBranches] = useState([]);
@@ -81,6 +86,9 @@ const QueryPage = () => {
   };
 
   useEffect(() => {
+    if(!userLoggedIn) {
+      navigate('/')
+    }
     fetchCollegeData();
     fetchBranchData();
     fetchCategories();

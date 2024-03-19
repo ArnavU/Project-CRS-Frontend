@@ -1,6 +1,5 @@
 import { useState } from "react";
 // import "../Styles/App.css";
-import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
 import QueryPage from "./QueryPage";
 import Index from "./MainPage";
@@ -10,28 +9,34 @@ import MainPage from "./MainPage";
 import { HiMenu } from "react-icons/hi";
 import { IoIosClose } from "react-icons/io";
 import Admin from "./Admin";
+import Login from "../auth/login";
+import Register from "../auth/register";
+import { AuthProvider } from "../contexts/authContext";
+import Header from "./Header";
 
 const App = () => {
-  const [isLogin, setIsLogin] = useState(false);
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/signuppage" element={<SignupPage />} />
-          <Route path="/querypage" element={<QueryPage />} />
-          <Route path="/mainpage" element={<MainPage />} />
-          <Route path="/Admin" element={<Admin />} />
-
-          {/* <Route
+	const [isLogin, setIsLogin] = useState(false);
+	return (
+		<>
+			<AuthProvider>
+				<BrowserRouter>
+        			<Header />
+					<Routes>
+						<Route path="/" element={<Login />} />
+						<Route path="/register" element={<Register />} />
+						<Route path="/querypage" element={<QueryPage />} />
+						<Route path="/mainpage" element={<MainPage />} />
+						<Route path="/Admin" element={<Admin />} />
+						{/* <Route
             path="querypage"
             element={isLogin ? <QueryPage /> : <LoginPage />}
           /> */}
-        </Routes>
-      </BrowserRouter>
-      <ThemeToggle />
-    </>
-  );
+					</Routes>
+				</BrowserRouter>
+				<ThemeToggle />
+			</AuthProvider>
+		</>
+	);
 };
 
 export default App;
