@@ -1,0 +1,367 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: math, serif;
+}
+
+.labelofexam {
+  margin-left: 33px;
+  color: var(--exam-label-color);
+}
+
+
+
+
+:root {
+  --body-bg-color: #00ffff;
+  --file-background-color: #00fff700;
+  --heading-color: #001a1a;
+  --form-background-color: #f7f7f7;
+  --shadow: 0px 0px 56px rgba(69, 69, 69, .2);
+  --border: 3px solid #00ffff;
+
+
+  --button-color-before-hover: #ffffff;
+  --button-color-after-hover: #000000;
+  --button-text-after-hover: rgb(253, 219, 150);
+  --button-border-after-hover: 5px solid #000000;
+  --file-upload-div-color: #ffffff6e;
+  --admin-panel-heading-color: #001a1a;
+  --p-color: #001a1a;
+  --drag-n-drop-heading: #001a1a;
+  --exam-label-color: black;
+
+
+  --bg-color-of-theme-toggle: black;
+  --icon-color-of-theme-toggle: rgb(255, 255, 255);
+
+}
+
+[data-theme="dark"] {
+
+  --body-bg-color: #000000;
+  --file-background-color: #00000000;
+  --heading-color: #ffffff;
+  --form-background-color: #f7f7f7;
+  --shadow: 0px 0px 56px rgba(0, 0, 0, 0.2);
+  --border: 3px solid #00ffff;
+  --button-color-before-hover: #e1fffe;
+  --button-color-after-hover: #000000;
+  --button-text-after-hover: rgb(253, 219, 150);
+  --button-border-after-hover: 5px solid #000000;
+  --file-upload-div-color: rgb(28, 28, 28);
+  --admin-panel-heading-color: white;
+  --p-color: white;
+  --drag-n-drop-heading: #001a1a;
+  --exam-label-color: white;
+
+
+  --bg-color-of-theme-toggle: rgb(255, 255, 255);
+  --icon-color-of-theme-toggle: rgb(0, 0, 0);
+}
+
+
+::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 20px;
+
+
+}
+
+::-webkit-scrollbar-track {
+  background: #676767;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #000000;
+}
+
+body {
+  background-color: var(--body-bg-color);
+  transition: 0.2s;
+  animation-duration: 0.2s;
+}
+
+.screen-div {
+  font-size: 1.5rem;
+  height: 100vh;
+  margin: auto;
+  background: var(--file-background-color);
+  transition: 0.2s;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+.admin-panel-heading {
+  margin: auto;
+  text-align: center;
+  padding: 5px;
+  color: var(--admin-panel-heading-color);
+  margin-bottom: 12px;
+
+}
+
+
+.file-upload-div {
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: 50%;
+  width: 50%;
+  background-color: var(--file-upload-div-color);
+  margin: auto;
+  border-radius: 40px;
+  padding: 17px;
+}
+
+h3 {
+  margin-top: 22px;
+  color: var(--heading-color);
+}
+
+p {
+  color: var(--p-color);
+}
+
+.choosefile-div {
+  display: flex;
+  flex-direction: column;
+  /* padding-bottom: 0px; */
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--form-background-color);
+  height: 50%;
+  margin: 10px;
+  min-width: 50%;
+  border-radius: 25px;
+  padding: 5px 10px;
+  box-shadow: 0px 0px 56px rgba(69, 69, 69, .2);
+  padding-bottom: 0px;
+}
+
+.choosefile-div h3 {
+  color: var(--drag-n-drop-heading);
+}
+
+input::file-selector-button {
+  font-weight: bold;
+  background-color: #001a1a;
+  color: rgb(255, 255, 255);
+  padding: 0.5em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  margin-left: 25px;
+  margin-top: 10px;
+}
+
+.fileupload-options-or-buttons-div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+
+}
+
+.fileupload-options-div select,
+.fileupload-options-div input {
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  margin: auto;
+  background: #eeeeee;
+  margin-top: 15px;
+  margin-inline: 10px;
+  font-size: 1.1rem;
+}
+
+
+.file-upload-div button {
+  background: #e8e8e8;
+  padding: 8px 13px;
+  border: none;
+  margin: 13px;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.file-upload-div button:hover {
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.26));
+  background: #001a1a;
+  color: white;
+  transition-duration: 0.2s;
+}
+
+
+
+/* PdfList Styles */
+
+.pdf-list {
+  display: flex;
+  background: var(--file-background-color);
+  flex-wrap: wrap;
+  /* margin: 5px; */
+  justify-content: space-evenly;
+  padding-right: 25px;
+}
+
+.pdf-card {
+  margin-top: 25px;
+  margin-left: 25px;
+  background: var(--file-upload-div-color);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  min-width: 400px;
+  backdrop-filter: blur(25px);
+}
+
+
+
+.pdf-card button {
+  padding: 10px 20px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  border: none;
+  background-color: var(--button-color-before-hover);
+  margin: 10px 10px 0 0;
+  cursor: pointer;
+  transition-duration: 0.2s;
+  font-weight: bolder;
+  font-size: 1.1rem;
+}
+
+.pdf-card button:hover {
+  background-color: var(--button-color-after-hover);
+  color: white;
+}
+
+
+
+.themediv {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 20px;
+  background-color: var(--bg-color-of-theme-toggle);
+  border: none;
+  color: var(--icon-color-of-theme-toggle);
+  padding: 20px;
+  cursor: pointer;
+  animation: animateWhenTouch 0.2s ease-in-out
+}
+
+.darkthemeicon {
+  transform: scale(1.5);
+}
+
+.themediv:active {
+  /* transform: scale(1.1); */
+  /* transition-duration: 0.2s;*/
+  animation: animateWhenTouch 0.5s 0.5s ease-in-out both;
+}
+
+@keyframes animateWhenTouch {
+  0% {
+    transform: scale(1);
+    animation-timing-function: ease-in-out;
+  }
+
+  100% {
+    transform: scale(0.95);
+    animation-timing-function: ease-in-out;
+  }
+
+}
+
+
+
+
+
+/* ################################# #PDF #Shimmer #######################*/
+
+
+.pdf-list-shimmer {
+  display: flex;
+  background: linear-gradient(72deg, #e8f5fe, #00fff7);
+  flex-wrap: wrap;
+  /* margin: 5px; */
+  justify-content: space-evenly;
+  padding-right: 25px;
+}
+
+.pdf-card-shimmer {
+  margin-top: 25px;
+  margin-left: 25px;
+  margin-bottom: 25px;
+  background: linear-gradient(-45deg, #d1d1d11c, #ffffff7c, #d1d1d11c);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  min-width: 400px;
+  background-size: 300%;
+  background-position-x: 100%;
+  animation: shimmer 2s infinite;
+}
+
+.pdf-card-shimmer p,
+.pdf-card-shimmer h3,
+.pdf-card-shimmer button {
+  color: #6a6a6a00;
+  background-color: #ffffff63;
+  border-radius: 10px;
+  margin: 4px;
+  padding: 2px;
+}
+
+
+.pdf-card-shimmer button {
+  padding: 10px 20px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  border: none;
+  margin: 10px 10px 0 0;
+  cursor: pointer;
+  transition-duration: 0.2s;
+  font-weight: bolder;
+  font-size: 1.1rem;
+}
+
+
+@keyframes shimmer {
+  to {
+    background-position-x: 0%
+  }
+}
+
+
+@media (orientation: portrait) {
+  .pdf-card {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    margin-left: 25px;
+    min-width: auto;
+  }
+
+  .file-upload-div {
+    width: 80%;
+  }
+
+  .pdf-card-shimmer {
+    min-width: auto;
+  }
+
+}
