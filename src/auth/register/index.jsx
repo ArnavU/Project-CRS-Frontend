@@ -24,6 +24,7 @@ const Register = () => {
                 const isValidUser = await doCreateUserWithEmailAndPassword(email, password);
                 if(!isValidUser) {
                     setErrorMessage("User Already Exists");
+                    setIsRegistering(false);
                     return;
                 }
                 setUserName(email);
