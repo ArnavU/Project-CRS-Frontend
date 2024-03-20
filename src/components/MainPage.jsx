@@ -223,9 +223,10 @@ const MainPage = ({ queryString }) => {
 								arrOfRounds.push(i);
 							}
 
-							return arrOfRounds.map((round) => {
+							return arrOfRounds.map((round, index) => {
 								return (
 									<option
+										key={index}
 										value={round}
 									>{`Round ${round}`}</option>
 								);
