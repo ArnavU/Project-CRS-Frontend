@@ -3,17 +3,19 @@ import MainPage from "./MainPage";
 import "../Styles/MainPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
-import { BRANCH_LIST_URL, CATEGORY_LIST_URL, COLLEGE_LIST_URL } from "../utils/constants";
+import {
+  BRANCH_LIST_URL,
+  CATEGORY_LIST_URL,
+  COLLEGE_LIST_URL,
+} from "../utils/constants";
 
 let collegeListURL = COLLEGE_LIST_URL;
 let branchListURL = BRANCH_LIST_URL;
 let categoryURL = CATEGORY_LIST_URL;
 
 const QueryPage = () => {
-  const {userLoggedIn} = useAuth();
+  const { userLoggedIn } = useAuth();
   const navigate = useNavigate();
-
-  
 
   // let queryString = "Hi";
   const [queryString, setQueryString] = useState("Hi");
@@ -85,8 +87,8 @@ const QueryPage = () => {
   };
 
   useEffect(() => {
-    if(!userLoggedIn) {
-      navigate('/')
+    if (!userLoggedIn) {
+      navigate("/");
     }
     fetchCollegeData();
     fetchBranchData();
@@ -113,6 +115,7 @@ const QueryPage = () => {
             <div className="form-group">
               <label htmlFor="percentile">Percentile:</label>
               <input
+                className="query-input"
                 type="text"
                 name="percentile"
                 id="percentile"
@@ -130,6 +133,7 @@ const QueryPage = () => {
             <div className="form-group">
               <label htmlFor="rank">Rank:</label>
               <input
+                className="query-input"
                 type="text"
                 name="rank"
                 id="rank"
@@ -147,6 +151,7 @@ const QueryPage = () => {
             <div className="form-group">
               <label htmlFor="exam">Select Exam:</label>
               <select
+                className="query-input"
                 name="exam"
                 id="exam"
                 // ref={exam}
@@ -168,6 +173,7 @@ const QueryPage = () => {
             <div className="form-group">
               <label htmlFor="numRows">Result Display Limit:</label>
               <input
+                className="query-input"
                 type="number"
                 name="numRows"
                 id="numRows"
@@ -188,6 +194,7 @@ const QueryPage = () => {
                 Select Round:
               </label>
               <select
+                className="query-input"
                 name="round"
                 id="round"
                 ref={round}
@@ -207,6 +214,7 @@ const QueryPage = () => {
                 Select Category:
               </label>
               <select
+                className="query-input"
                 id="category"
                 name="category"
                 style={{ display: categoryVisibility ? "block" : "none" }}
@@ -222,7 +230,12 @@ const QueryPage = () => {
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="branch">Select Branch:</label>
-              <select name="branch" id="branch" ref={branch}>
+              <select
+                name="branch"
+                id="branch"
+                className="query-input"
+                ref={branch}
+              >
                 <option>All branches</option>
                 {branches.map((branchItem) => (
                   <option key={branchItem}>{branchItem}</option>
@@ -235,6 +248,7 @@ const QueryPage = () => {
             <div className="form-group">
               <label htmlFor="collegeSearch">Search College:</label>
               <input
+                className="query-input"
                 type="text"
                 name="collegeSearch"
                 id="collegeSearch"
@@ -253,6 +267,7 @@ const QueryPage = () => {
 
           <div className="form-row">
             <input
+              className="query-input"
               style={{ display: "none" }}
               type="text"
               name="page"
@@ -267,11 +282,11 @@ const QueryPage = () => {
               >
                 <button
                   type="submit"
-                  className="querypage-button"
+                  className="bg-white text-black submit-button hover:shadow-xl hover:text-white transition duration-300 mt-5"
                   // onClick={() => <Link to="/mainpage" element={<MainPage />} />}
                   onClick={() => submitHandler()}
                 >
-                  Get Results
+                  GET RESULTS
                 </button>
               </Link>
             </div>

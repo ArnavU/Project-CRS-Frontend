@@ -1,0 +1,32 @@
+.login-button-class {
+    background: #00fff761;
+    color: black;
+    transition: 0.3s;
+    transition-delay: 0.05s;
+}
+
+.login-button-class:hover {
+    background: #00fff7a7;
+    color: black;
+}
+
+
+.login-white-div {
+    background-color: #f3f3f3;
+}
+
+input {
+    background-color: #e7e7e7;
+}
+
+.login-heading {
+    margin-top: 0px;
+}
+
+.labels-for-inputs {
+    margin-bottom: 0px;
+}
+
+.Dont-have-an-acc {
+    color: black;
+}
