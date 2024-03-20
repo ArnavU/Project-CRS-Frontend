@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { HiMenu } from "react-icons/hi";
 import { IoIosClose } from "react-icons/io";
 import { useEffect } from "react";
-import useGetQueryData from "../hooks/useGetQueryData.js";
+// import useGetQueryData from "../hooks/useGetQueryData.js";
 import useGetBranchList from "../hooks/useGetBranchList.js";
 import useGetCollegeList from "../hooks/useGetCollegeList.js";
 import useGetCategoryList from "../hooks/useGetCategoryList.js";
@@ -61,12 +61,12 @@ const MainPage = ({ queryString }) => {
 		}/${branch.current.value}/${year.current.value}/${round.current.value}`;
 		console.log(queryString);
 
-		useGetQueryData(
-			queryString,
-			setQResponse,
-			setTempQResponse,
-			defaultDisplayLimit
-		);
+		// useGetQueryData(
+		// 	queryString,
+		// 	setQResponse,
+		// 	setTempQResponse,
+		// 	defaultDisplayLimit
+		// );
 		limit.current.value = defaultDisplayLimit;
 	};
 
@@ -93,7 +93,7 @@ const MainPage = ({ queryString }) => {
       navigate('/');
     }
 
-		useGetQueryData(queryString, setQResponse);
+		// useGetQueryData(queryString, setQResponse);
 		useGetBranchList(setBranches);
 		useGetCollegeList(setColleges);
 		useGetCategoryList(setCategories);
