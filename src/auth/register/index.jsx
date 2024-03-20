@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navigate, Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/authContext'
 import { doCreateUserWithEmailAndPassword } from '../../firebase/auth'
@@ -15,15 +15,34 @@ const Register = () => {
 
     const { userLoggedIn, setUserName } = useAuth()
 
+    useEffect(()=> {
+        if(userLoggedIn) {
+            navigate('/mainPage');
+        }
+    })
+
     const onSubmit = async (e) => {
         e.preventDefault()
         
         if(!isRegistering) {
             setIsRegistering(true)
             if(password === confirmPassword) {                
-                const isValidUser = await doCreateUserWithEmailAndPassword(email, password);
-                if(!isValidUser) {
-                    setErrorMessage("User Already Exists");
+                const response = await doCreateUserWithEmailAndPassword(email, password);
+                console.log("Is valid user: ", response.isValidUser)
+                if(!response.isValidUser) {
+                    // message display logic
+                    let displayMessage = null;
+                    let message = response.message.message;
+                    if(message.includes("weak-password")) {
+                        displayMessage = "Password should be at least 6 characters";
+                    }
+                    else if(message.includes("email-already-in-use")) {
+                        displayMessage = "This email is already registered";
+                    }
+                    else if(message.includes("invalid-email")) {
+                        displayMessage = "Pleases enter a valid email";
+                    }
+                    setErrorMessage(displayMessage);
                     setIsRegistering(false);
                     return;
                 }

@@ -12,12 +12,11 @@ import {
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
   
   try {
-    console.log(await createUserWithEmailAndPassword(auth, email, password));
-    return true;
+    let createdUser = await createUserWithEmailAndPassword(auth, email, password);
+    return {isValidUser: true, message: "Registration successful"};
   }
   catch(err) {
-    console.log("Invalid Credentials")
-    return false;
+    return {isValidUser: false, message: err};
   }
 };
 
