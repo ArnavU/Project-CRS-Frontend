@@ -37,7 +37,6 @@ function FileUpload({ setReload }) {
       console.log("Uploading Started");
       const response = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/api/v1/admin/pdf/${exam}/${year}/${round}`,
-
         formData
       );
       console.log(response.request.status);

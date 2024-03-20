@@ -3,12 +3,11 @@ import MainPage from "./MainPage";
 import "../Styles/MainPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
-let collegeListURL =
-  "https://project-crs-server-1.onrender.com/api/v1/lists/colleges/cet";
-let branchListURL =
-  "https://project-crs-server-1.onrender.com/api/v1/lists/branches/cet";
-let categoryURL =
-  "https://project-crs-server-1.onrender.com/api/v1/lists/categories/cet/2022";
+import { BRANCH_LIST_URL, CATEGORY_LIST_URL, COLLEGE_LIST_URL } from "../utils/constants";
+
+let collegeListURL = COLLEGE_LIST_URL;
+let branchListURL = BRANCH_LIST_URL;
+let categoryURL = CATEGORY_LIST_URL;
 
 const QueryPage = () => {
   const {userLoggedIn} = useAuth();
