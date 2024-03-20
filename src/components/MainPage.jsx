@@ -3,8 +3,7 @@ import { useRef, useState } from "react";
 import { HiMenu } from "react-icons/hi";
 import { IoIosClose } from "react-icons/io";
 import { useEffect } from "react";
-// import useGetQueryData from "../hooks/useGetQueryData.js";
-// import useGetBranchList from "../hooks/useGetBranchList.js";
+import useGetQueryData from "../hooks/useGetQueryData.jsx";
 import useGetCollegeList from "../hooks/useGetCollegeList.jsx";
 import useGetCategoryList from "../hooks/useGetCategoryList.jsx";
 import useGetYearList from "../hooks/useGetYearData.jsx";
@@ -62,12 +61,12 @@ const MainPage = ({ queryString }) => {
 		}/${branch.current.value}/${year.current.value}/${round.current.value}`;
 		console.log(queryString);
 
-		// useGetQueryData(
-		// 	queryString,
-		// 	setQResponse,
-		// 	setTempQResponse,
-		// 	defaultDisplayLimit
-		// );
+		useGetQueryData(
+			queryString,
+			setQResponse,
+			setTempQResponse,
+			defaultDisplayLimit
+		);
 		limit.current.value = defaultDisplayLimit;
 	};
 
@@ -93,7 +92,7 @@ const MainPage = ({ queryString }) => {
 			navigate("/");
 		}
 
-		// useGetQueryData(queryString, setQResponse);
+		useGetQueryData(queryString, setQResponse);
 		useGetBranchList(setBranches);
 		useGetCollegeList(setColleges);
 		useGetCategoryList(setCategories);
@@ -107,6 +106,8 @@ const MainPage = ({ queryString }) => {
 
 	return (
 		<div className="maindiv">
+			<button className="absolute right-4 top-20 p-2 rounded-md bg-purple-900" onClick={()=>{navigate('/Admin')}}>Admin</button>
+
 			<input type="checkbox" id="check" />
 			<label htmlFor="check">
 				<HiMenu id="btn" className="icon" />
