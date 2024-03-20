@@ -3,11 +3,11 @@ import { useRef, useState } from "react";
 import { HiMenu } from "react-icons/hi";
 import { IoIosClose } from "react-icons/io";
 import { useEffect } from "react";
-import useGetQueryData from "../hooks/useGetQueryData";
-import useGetBranchList from "../hooks/useGetBranchList";
-import useGetCollegeList from "../hooks/useGetCollegeList";
-import useGetCategoryList from "../hooks/useGetCategoryList";
-import useGetYearList from "../hooks/useGetYearData";
+import useGetQueryData from "../hooks/useGetQueryData.js";
+import useGetBranchList from "../hooks/useGetBranchList.js";
+import useGetCollegeList from "../hooks/useGetCollegeList.js";
+import useGetCategoryList from "../hooks/useGetCategoryList.js";
+import useGetYearList from "../hooks/useGetYearData.js";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 
