@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { SERVER_URL } from "../utils/constants";
 import axios from "axios";
 import PdfListShimmer from "./PdfListShimmer";
 import useGetPdf from "../hooks/useGetPdf.jsx";
@@ -11,7 +10,7 @@ function PdfList({ setReload, reload }) {
 	const fetchPdfs = async () => {
 		try {
 			const yearListResponse = await fetch(
-				`${SERVER_URL}/api/v1/lists/yearlist/mht-cet`
+				`${import.meta.env.VITE_SERVER_URL}/api/v1/lists/yearlist/mht-cet`
 			);
 			if (!yearListResponse.ok) {
 				throw new Error("Failed to fetch year list");
@@ -42,7 +41,8 @@ function PdfList({ setReload, reload }) {
 			}
 
 		} catch (error) {
-			console.error("Error fetching year list:", error);
+			// console.error("Error fetching year list:", error);
+			console.log("Some error occured")
 		}
 	};
 
@@ -64,7 +64,7 @@ function PdfList({ setReload, reload }) {
 	const deletePdf = async (year, round, exam, name) => {
 		try {
 			await axios.delete(
-				`${SERVER_URL}/api/v1/pdf/delete/${year}/${round}/${exam}/${name}`
+				`${import.meta.env.VITE_SERVER_URL}/api/v1/pdf/delete/${year}/${round}/${exam}/${name}`
 			);
 			setReload(!reload);
 		} catch (err) {

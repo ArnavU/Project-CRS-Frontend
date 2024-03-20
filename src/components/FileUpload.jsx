@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { SERVER_URL } from "../utils/constants.js";
 import axios from "axios";
 import "../Styles/AdminIndex.css";
 
@@ -37,7 +36,7 @@ function FileUpload({ setReload }) {
     try {
       console.log("Uploading Started");
       const response = await axios.post(
-        `${SERVER_URL}/api/v1/admin/pdf/${exam}/${year}/${round}`,
+        `${import.meta.env.VITE_SERVER_URL}/api/v1/admin/pdf/${exam}/${year}/${round}`,
 
         formData
       );

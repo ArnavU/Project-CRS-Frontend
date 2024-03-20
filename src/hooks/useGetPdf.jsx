@@ -1,9 +1,8 @@
-import { SERVER_URL } from "../utils/constants";
 
 const useGetPdf = async (year, round) => {
     console.log("Fetching pdf")
     const response = await fetch(
-        `${SERVER_URL}/api/v1/lists/pdfList/${year}/${round}`
+        `${import.meta.env.VITE_SERVER_URL}/api/v1/lists/pdfList/${year}/${round}`
     );
     if (!response.ok) {
         throw new Error(
