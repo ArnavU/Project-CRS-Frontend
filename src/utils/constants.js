@@ -3,3 +3,5 @@ export const COLLEGE_LIST_URL = `${import.meta.env.VITE_SERVER_URL}/api/v1/lists
 export const BRANCH_LIST_URL = `${import.meta.env.VITE_SERVER_URL}/api/v1/lists/branches/cet`;
 
 export const CATEGORY_LIST_URL = `${import.meta.env.VITE_SERVER_URL}/api/v1/lists/categories/cet/2022`;
+
+export const YEAR_LIST = `${import.meta.env.VITE_SERVER_URL}/api/v1/lists/yearlist/mht-cet`

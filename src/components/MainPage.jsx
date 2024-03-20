@@ -10,13 +10,11 @@ import useGetYearList from "../hooks/useGetYearData.jsx";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 import useGetBranchList from "../hooks/useGetBranchList.jsx";
+import { BRANCH_LIST_URL, CATEGORY_LIST_URL, COLLEGE_LIST_URL } from "../utils/constants.js";
 
-let collegeListURL =
-	"https://project-crs-server-1.onrender.com/api/v1/lists/colleges/cet";
-let branchListURL =
-	"https://project-crs-server-1.onrender.com/api/v1/lists/branches/cet";
-let categoryURL =
-	"https://project-crs-server-1.onrender.com/api/v1/lists/categories/cet/2022";
+let collegeListURL = COLLEGE_LIST_URL;
+let branchListURL = BRANCH_LIST_URL;
+let categoryURL = CATEGORY_LIST_URL;
 
 const MainPage = ({ queryString }) => {
 	const { userLoggedIn } = useAuth();
