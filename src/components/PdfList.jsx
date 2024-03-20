@@ -42,7 +42,7 @@ function PdfList({ setReload, reload }) {
 
 		} catch (error) {
 			// console.error("Error fetching year list:", error);
-			console.log("Some error occured")
+			console.log("Some error occured", error)
 		}
 	};
 
