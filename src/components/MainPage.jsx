@@ -4,23 +4,24 @@ import { HiMenu } from "react-icons/hi";
 import { IoIosClose } from "react-icons/io";
 import { useEffect } from "react";
 // import useGetQueryData from "../hooks/useGetQueryData.js";
-import useGetBranchList from "../hooks/useGetBranchList.js";
-import useGetCollegeList from "../hooks/useGetCollegeList.js";
-import useGetCategoryList from "../hooks/useGetCategoryList.js";
-import useGetYearList from "../hooks/useGetYearData.js";
+// import useGetBranchList from "../hooks/useGetBranchList.js";
+import useGetCollegeList from "../hooks/useGetCollegeList.jsx";
+import useGetCategoryList from "../hooks/useGetCategoryList.jsx";
+import useGetYearList from "../hooks/useGetYearData.jsx";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
+import useGetBranchList from "../hooks/useGetBranchList.jsx";
 
 let collegeListURL =
-"https://project-crs-server-1.onrender.com/api/v1/lists/colleges/cet";
+	"https://project-crs-server-1.onrender.com/api/v1/lists/colleges/cet";
 let branchListURL =
-"https://project-crs-server-1.onrender.com/api/v1/lists/branches/cet";
+	"https://project-crs-server-1.onrender.com/api/v1/lists/branches/cet";
 let categoryURL =
-"https://project-crs-server-1.onrender.com/api/v1/lists/categories/cet/2022";
+	"https://project-crs-server-1.onrender.com/api/v1/lists/categories/cet/2022";
 
 const MainPage = ({ queryString }) => {
-  const { userLoggedIn } = useAuth();
-  const navigate = useNavigate();
+	const { userLoggedIn } = useAuth();
+	const navigate = useNavigate();
 
 	console.log("QueryString in main page: ");
 	console.log(queryString);
@@ -88,10 +89,9 @@ const MainPage = ({ queryString }) => {
 	};
 
 	useEffect(() => {
-
-    if (!userLoggedIn) {
-      navigate('/');
-    }
+		if (!userLoggedIn) {
+			navigate("/");
+		}
 
 		// useGetQueryData(queryString, setQResponse);
 		useGetBranchList(setBranches);

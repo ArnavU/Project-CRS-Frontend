@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { SERVER_URL } from "../utils/constants";
 import axios from "axios";
 import PdfListShimmer from "./PdfListShimmer";
-import useGetPdf from "../hooks/useGetPdf";
+import useGetPdf from "../hooks/useGetPdf.jsx";
 
 function PdfList({ setReload, reload }) {
 	const [pdfs, setPdfs] = useState([]);
