@@ -195,7 +195,7 @@ const MainPage = ({ queryString }) => {
 						style={{ display: "block" }}
 						ref={category}
 					>
-						{categories.map((category) => (
+						{categories?.map((category) => (
 							<option key={category}>{category}</option>
 						))}
 					</select>

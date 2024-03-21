@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PdfListShimmer from "./PdfListShimmer";
 import useGetPdf from "../hooks/useGetPdf.jsx";
+import UploadingShimmer from "./UploadingShimmer.jsx";
 
 function PdfList({ setReload, reload }) {
 	const [pdfs, setPdfs] = useState([]);
 	const [shimmerQty, setShimmerQty] = useState(6);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const fetchPdfs = async () => {
 		try {
@@ -13,6 +15,7 @@ function PdfList({ setReload, reload }) {
 				`${import.meta.env.VITE_SERVER_URL}/api/v1/lists/yearlist/mht-cet`
 			);
 			if (!yearListResponse.ok) {
+				console.log("FAiled to fetch yearlist")
 				throw new Error("Failed to fetch year list");
 			}
 			const yearData = await yearListResponse.json();
@@ -23,6 +26,7 @@ function PdfList({ setReload, reload }) {
 			}
 			setShimmerQty(totalPdfs);
 
+			setIsLoading(true);
 			for (let year of arrOfYears) {
 				console.log("Year: ", year);
 				for (let round = 1; round <= yearData.data[year]; round++) {
@@ -39,6 +43,8 @@ function PdfList({ setReload, reload }) {
 					}
 				}
 			}
+			setIsLoading(false);
+
 
 		} catch (error) {
 			// console.error("Error fetching year list:", error);
@@ -47,8 +53,9 @@ function PdfList({ setReload, reload }) {
 	};
 
 	useEffect(() => {
+		setPdfs([]);
 		fetchPdfs();
-	}, []);
+	}, [reload]);
 
 	const openPdf = (pdf) => {
 		try {
@@ -77,6 +84,7 @@ function PdfList({ setReload, reload }) {
 
 	return (
 		<div className="pdf-list">
+			{isLoading && <UploadingShimmer />}
 			
 				{pdfs?.map((pdf, index) => (
 					<div key={`${pdf.year}${pdf.round}`} className="pdf-card">
@@ -84,25 +92,30 @@ function PdfList({ setReload, reload }) {
 						<p>Year: {pdf.year}</p>
 						<p>Round: {pdf.round}</p>
 						<p>Exam: {pdf.exam}</p>
-						<button
-							className="view-pdf-button"
-							onClick={() => openPdf(pdf)}
-						>
-							View
+						{isLoading ? <button className="">View</button> : 
+							<button
+								className="view-pdf-button"
+								onClick={() => openPdf(pdf)}
+							>
+								View
+							</button>
+						}
+
+						{isLoading ? <button>Delete</button> :
+							<button
+								className="delete-pdf-button"
+								onClick={() =>
+									deletePdf(
+										pdf.year,
+										pdf.round,
+										pdf.exam,
+										pdf.name
+									)
+								}
+							>
+								Delete
 						</button>
-						<button
-							className="delete-pdf-button"
-							onClick={() =>
-								deletePdf(
-									pdf.year,
-									pdf.round,
-									pdf.exam,
-									pdf.name
-								)
-							}
-						>
-							Delete
-						</button>
+						}
 					</div>
 				))
 				}
