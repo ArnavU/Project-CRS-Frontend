@@ -50,7 +50,7 @@
 
   /* body colors */
   --body-bg-color: #000000;
-  --file-background-color: #00000000;
+  --file-background-color: #000000;
   --heading-color: #ffffff;
   --form-background-color: #f7f7f7;
   --shadow: 0px 0px 56px rgba(0, 0, 0, 0.2);
@@ -70,7 +70,7 @@
 
 
   /* for admin panel */
-  --file-upload-div-color: rgb(28, 28, 28);
+  --file-upload-div-color: rgb(72 72 72);
   --admin-panel-heading-color: white;
   --p-color: white;
   --drag-n-drop-heading: #001a1a;
@@ -103,8 +103,8 @@
 
 
 
-::-webkit-scrollbar {
-  width: 7px;
+/* ::-webkit-scrollbar {
+  width: 0px;
   border-radius: 20px;
 
 
@@ -121,7 +121,7 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #000000;
-}
+} */
 
 body {
   background-color: var(--body-bg-color);

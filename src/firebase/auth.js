@@ -10,23 +10,24 @@ import {
 } from "firebase/auth";
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
-  
   try {
-    let createdUser = await createUserWithEmailAndPassword(auth, email, password);
-    return {isValidUser: true, message: "Registration successful"};
-  }
-  catch(err) {
-    return {isValidUser: false, message: err};
+    let createdUser = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    return { isValidUser: true, message: "Registration successful" };
+  } catch (err) {
+    return { isValidUser: false, message: err };
   }
 };
 
-export const doSignInWithEmailAndPassword = async(email, password) => {
+export const doSignInWithEmailAndPassword = async (email, password) => {
   try {
     console.log(await signInWithEmailAndPassword(auth, email, password));
     return true;
-  }
-  catch(err) {
-    console.log("Invalid Credentials")
+  } catch (err) {
+    console.log("Invalid Credentials");
     return false;
   }
 };
