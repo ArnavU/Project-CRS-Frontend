@@ -99,14 +99,14 @@ const MainPage = ({ queryString }) => {
   };
 
   useEffect(() => {
-    // if (!userLoggedIn) {
-    //   navigate("/");
-    // }
-    // useGetQueryData(queryString, setQResponse);
-    // useGetBranchList(setBranches);
-    // useGetCollegeList(setColleges);
-    // useGetCategoryList(setCategories);
-    // useGetYearList(setYearData, setYearList, setSelectedYear, setSelectedRound);
+    if (!userLoggedIn) {
+      navigate("/");
+    }
+    useGetQueryData(queryString, setQResponse);
+    useGetBranchList(setBranches);
+    useGetCollegeList(setColleges);
+    useGetCategoryList(setCategories);
+    useGetYearList(setYearData, setYearList, setSelectedYear, setSelectedRound);
   }, []);
 
   return (
