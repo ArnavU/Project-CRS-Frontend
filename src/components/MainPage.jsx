@@ -7,7 +7,7 @@ import useGetQueryData from "../hooks/useGetQueryData.jsx";
 import useGetCollegeList from "../hooks/useGetCollegeList.jsx";
 import useGetCategoryList from "../hooks/useGetCategoryList.jsx";
 import useGetYearList from "../hooks/useGetYearData.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 import useGetBranchList from "../hooks/useGetBranchList.jsx";
 import {
@@ -15,6 +15,7 @@ import {
   CATEGORY_LIST_URL,
   COLLEGE_LIST_URL,
 } from "../utils/constants.js";
+import Loader from "./Loader.jsx";
 
 let collegeListURL = COLLEGE_LIST_URL;
 let branchListURL = BRANCH_LIST_URL;
@@ -53,22 +54,29 @@ const MainPage = ({ queryString }) => {
   // const round = 1;
   const limit = useRef(7);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(true);
+
   const submitHandler = (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setShowSidebar(false);
 
-    let queryString = `${gender}/${category.current.value.toLowerCase()}/${
-      percentile.current.value ? percentile.current.value : "null"
-    }/${rank.current.value ? rank.current.value : "null"}/${
-      college.current.value || "null"
-    }/${branch.current.value}/${year.current.value}/${round.current.value}`;
-    console.log(queryString);
+    // let queryString = `${gender}/${category.current.value.toLowerCase()}/${
+    //   percentile.current.value ? percentile.current.value : "null"
+    // }/${rank.current.value ? rank.current.value : "null"}/${
+    //   college.current.value || "null"
+    // }/${branch.current.value}/${year.current.value}/${round.current.value}`;
+    // console.log("querystring is  " + queryString);
 
     useGetQueryData(
       queryString,
       setQResponse,
       setTempQResponse,
-      defaultDisplayLimit
+      defaultDisplayLimit,
+      setIsLoading
     );
+
     limit.current.value = defaultDisplayLimit;
   };
 
@@ -78,27 +86,27 @@ const MainPage = ({ queryString }) => {
         return index < limit.current.value;
       })
     );
+    console.log();
   };
 
   // function to set round on the basis year selected
   const selectRoundsByYear = (e) => {
     const year = e.target.value;
-    console.log(year);
+    // console.log(year);
     const round = yearData[year];
     setSelectedRound(round);
-    console.log("Round: ", round);
+    // console.log("Round: ", round);
   };
 
   useEffect(() => {
-    if (!userLoggedIn) {
-      navigate("/");
-    }
-
-    useGetQueryData(queryString, setQResponse);
-    useGetBranchList(setBranches);
-    useGetCollegeList(setColleges);
-    useGetCategoryList(setCategories);
-    useGetYearList(setYearData, setYearList, setSelectedYear, setSelectedRound);
+    // if (!userLoggedIn) {
+    //   navigate("/");
+    // }
+    // useGetQueryData(queryString, setQResponse);
+    // useGetBranchList(setBranches);
+    // useGetCollegeList(setColleges);
+    // useGetCategoryList(setCategories);
+    // useGetYearList(setYearData, setYearList, setSelectedYear, setSelectedRound);
   }, []);
 
   return (
@@ -111,14 +119,21 @@ const MainPage = ({ queryString }) => {
       >
         Admin
       </button>
+      <input type="checkbox" id="check" checked={showSidebar} />
 
-      <input type="checkbox" id="check" />
       <label htmlFor="check">
-        <HiMenu id="btn" className="icon" />
-        <IoIosClose className="icon" id="cancel" />
+        <HiMenu
+          id="btn"
+          className="icon"
+          onClick={() => setShowSidebar(true)}
+        />
+        <IoIosClose
+          className="icon"
+          id="cancel"
+          onClick={() => setShowSidebar(false)}
+        />
       </label>
-
-      <div className="sidebar">
+      <div className="sidebar ">
         <header>
           <b>Enter Your Query</b>
         </header>
@@ -280,54 +295,61 @@ const MainPage = ({ queryString }) => {
             ref={limit}
             onChange={limitChangeHandler}
           />
-
+          {/* ################################Submit button sidebar ####################### */}
           <button
             type="submit"
             className="bg-white text-black submit-button hover:shadow-xl hover:text-white transition duration-300 m-5"
+            onClick={() => {
+              setShowSidebar(false);
+            }}
           >
             <b>Apply Filters</b>
           </button>
         </form>
       </div>
 
-      <div className={`table-container`}>
-        {/* table */}
-        <p
-          id="flash_branch_not_available"
-          style={{ display: "none", color: "red" }}
-        >
-          You cannot get the selected branch in this college
-        </p>
-        <p
-          id="flash_percentile_rank_not_sufficient"
-          style={{ display: "none", color: "red" }}
-        >
-          This is the minimum percentile/rank you need to get this college
-        </p>
-        <table id="table">
-          <tbody>
-            <tr>
-              <th>Serial No.</th>
-              <th>Institute</th>
-              <th>Rank</th>
-              <th>Cutoff</th>
-              <th>Course Name</th>
-              <th>Exam</th>
-            </tr>
-
-            {tempQResponse.map((CollegeInfo, index) => (
-              <tr key={index + 1}>
-                <td>{index + 1}</td>
-                <td>{CollegeInfo.college}</td>
-                <td>{CollegeInfo.rank}</td>
-                <td>{CollegeInfo.percentile}</td>
-                <td>{CollegeInfo.course}</td>
-                <td>MHT-CET</td>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="table-container">
+          {/* table */}
+          <p
+            id="flash_branch_not_available"
+            style={{ display: "none", color: "red" }}
+          >
+            You cannot get the selected branch in this college
+          </p>
+          <p
+            id="flash_percentile_rank_not_sufficient"
+            style={{ display: "none", color: "red" }}
+          >
+            This is the minimum percentile/rank you need to get this college
+          </p>
+          <table id="table">
+            <tbody>
+              <tr>
+                <th>Serial No.</th>
+                <th>Institute</th>
+                <th>Rank</th>
+                <th>Cutoff</th>
+                <th>Course Name</th>
+                <th>Exam</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+
+              {tempQResponse.map((CollegeInfo, index) => (
+                <tr key={index + 1}>
+                  <td>{index + 1}</td>
+                  <td>{CollegeInfo.college}</td>
+                  <td>{CollegeInfo.rank}</td>
+                  <td>{CollegeInfo.percentile}</td>
+                  <td>{CollegeInfo.course}</td>
+                  <td>MHT-CET</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

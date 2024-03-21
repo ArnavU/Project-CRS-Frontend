@@ -37,11 +37,15 @@
 
 
     /* light colors for table */
-    --th-bg-color: rgb(255, 255, 255);
+    --th-bg-color: rgb(238 238 238);
     --th-text-color: rgb(0, 0, 0);
     --th-bg-color-hover: rgba(255, 255, 255, 0.657);
     --th-text-color-hover: rgb(23, 23, 23);
-    --table-border-color: #e2e2e2;
+    --td-bg-color: #ffffff;
+    --td-text-color: rgb(0, 0, 0);
+    --table-border-color: #d1d1d1;
+
+
     --sidebar-header-bg: white;
     --sidebar-icon-color: black;
     --select-option-bg-color: white;
@@ -78,7 +82,7 @@
 
 
     /* for admin panel */
-    --file-upload-div-color: rgb(28, 28, 28);
+    --file-upload-div-color: rgb(72 72 72);
     --admin-panel-heading-color: white;
     --p-color: white;
     --drag-n-drop-heading: #001a1a;
@@ -91,10 +95,12 @@
 
 
     /* dark for table */
-    --th-bg-color: rgb(35, 35, 35);
+    --th-bg-color: rgb(19, 19, 19);
     --th-text-color: rgb(255, 255, 255);
-    --th-bg-color-hover: rgba(0, 0, 0, 0.579);
+    --th-bg-color-hover: rgba(26, 26, 26, 0.579);
     --th-text-color-hover: white;
+    --td-bg-color: #1f1f1f;
+    --td-text-color: white;
     --table-border-color: #525252;
 
     --sidebar-icon-color: white;
@@ -120,17 +126,21 @@
 
 /* Scrollbar styles */
 ::-webkit-scrollbar {
-    width: 0px;
-    border-radius: 20px;
+    cursor: pointer;
+    height: 6px;
+    width: 1px;
+    border-radius: 50%;
 }
 
 ::-webkit-scrollbar-track {
-    background: #ffffff;
+    cursor: pointer;
+    background: #63636300;
 }
 
 
 ::-webkit-scrollbar-thumb {
-    background: #555;
+    cursor: pointer;
+    background: #171717;
     border-radius: 20px;
 }
 
@@ -151,6 +161,13 @@
 @media (orientation:portrait) {
     .maindiv {
         overflow: scroll;
+    }
+
+    .table-container {
+        position: relative;
+        left: 127px;
+        margin-left: 85px;
+        margin-right: 85px;
     }
 }
 
@@ -183,6 +200,9 @@
 }
 
 
+
+
+
 /* Table styles */
 table {
     margin: 20px 250px;
@@ -198,7 +218,6 @@ table {
 
 th,
 td {
-    background: white;
     padding: 15px;
     text-align: left;
     border: 2px solid var(--table-border-color);
@@ -210,8 +229,8 @@ th {
 }
 
 td {
-    background-color: var(--button-bgcolor-before-hover);
-    color: var(--button-bgcolor-after-hover);
+    background-color: var(--td-bg-color);
+    color: var(--td-text-color);
 }
 
 .highlight {
@@ -321,7 +340,7 @@ select {
     max-width: 420px;
     min-height: 100%;
     transition: all 0.5s ease;
-    margin-left: 6px;
+    margin: 6px;
     z-index: 20;
     background: #96969687;
     color: var(--form-text-color);
@@ -380,7 +399,7 @@ label #btn {
 label #cancel {
     z-index: 1111;
     left: -395px;
-    top: 77px;
+    top: 80px;
     font-size: 58px;
     color: black;
     padding: 4px 9px;
@@ -393,13 +412,13 @@ label #cancel {
 }
 
 #check:checked~label #btn {
-    left: 360px;
+    /* left: 360px; */
     opacity: 0;
     pointer-events: none;
 }
 
 #check:checked~label #cancel {
-    left: 365px;
+    left: 19px;
 }
 
 #check:checked~table {
@@ -492,7 +511,9 @@ label #cancel {
 }
 
 .admin-button {
-    z-index: 20;
+    margin-top: 10px;
+    margin-right: 15px;
+    /* z-index: 20; */
 }
 
 
