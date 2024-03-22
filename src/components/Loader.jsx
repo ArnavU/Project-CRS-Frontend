@@ -1,8 +1,9 @@
 import React from "react";
+import "../Styles/MainPage.css";
 
 const Loader = () => {
   return (
-    <div class="text-center">
+    <div class="text-center loader">
       <div role="status">
         <svg
           aria-hidden="true"

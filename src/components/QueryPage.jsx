@@ -169,6 +169,7 @@ const QueryPage = () => {
                 </option>
               </select>
             </div>
+            <div className="or-text-transparent">OR</div>
 
             <div className="form-group">
               <label htmlFor="numRows">Result Display Limit:</label>
@@ -202,6 +203,7 @@ const QueryPage = () => {
                 <option defaultValue="2019">2019</option>
               </select>
             </div>
+            <div className="or-text-transparent">OR</div>
 
             <div className="form-group">
               <label htmlFor="gender">Gender: </label>
@@ -243,6 +245,8 @@ const QueryPage = () => {
                 <option defaultValue="round3">Round 3</option>
               </select>
             </div>
+
+            <div className="or-text-transparent">OR</div>
             <div className="form-group">
               <label
                 htmlFor="category"

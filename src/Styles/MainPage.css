@@ -165,7 +165,7 @@
 
     .table-container {
         position: relative;
-        left: 127px;
+        left: 105px;
         margin-left: 85px;
         margin-right: 85px;
     }
@@ -308,7 +308,7 @@ select {
     background-color: rgb(1 1 1 / 43%);
     border-radius: 10px;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 /* Mainpage Button styles */
@@ -592,7 +592,7 @@ select {
     background-color: var(--ip-or-select-bg-color);
     border-radius: 10px;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .hide {
@@ -662,6 +662,15 @@ select {
     font-weight: bold;
     margin: 0 10px;
     color: var(--label-color);
+}
+
+.or-text-transparent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 0 10px;
+    color: rgba(0, 0, 0, 0);
 }
 
 
@@ -836,4 +845,22 @@ button:focus {
 .profile-float p {
     /* color: rgb(255, 255, 255); */
     color: rgb(0, 0, 0);
+}
+
+
+
+
+/* ###################################### Loader Css ########################## */
+
+.loader {
+    width: auto;
+    margin-top: 300px;
+}
+
+
+#check:checked~.loader {
+    transition-duration: 0.5s;
+    margin-left: 420px;
+    width: auto;
+    float: right;
 }
