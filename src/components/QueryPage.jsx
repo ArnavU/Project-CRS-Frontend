@@ -3,21 +3,13 @@ import MainPage from "./MainPage";
 import "../Styles/MainPage.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
-import {
-  BRANCH_LIST_URL,
-  CATEGORY_LIST_URL,
-  COLLEGE_LIST_URL,
-} from "../utils/constants";
 import { QueryContext } from "../contexts/queryContext";
 import useGetQueryData from "../hooks/useGetQueryData";
 import useGetBranchList from "../hooks/useGetBranchList";
 import useGetCollegeList from "../hooks/useGetCollegeList";
 import useGetCategoryList from "../hooks/useGetCategoryList";
 import useGetYearList from "../hooks/useGetYearData";
-
-let collegeListURL = COLLEGE_LIST_URL;
-let branchListURL = BRANCH_LIST_URL;
-let categoryURL = CATEGORY_LIST_URL;
+import QueryPageShimmer from "./QueryPageShimmer";
 
 const QueryPage = () => {
   const { userLoggedIn } = useAuth();
@@ -65,33 +57,22 @@ const QueryPage = () => {
 		setSelectedRound,
 		defaultDisplayLimit,
 	} = useContext(QueryContext);
-
-  //For Filtering user input
-  // const [gender, setGender] = useState("");
-  // const [category, setCategory] = useState("");
-  // const [percentile, setPercentile] = useState("");
-  // const [rank, setRank] = useState("");
-  // const [college, setCollege] = useState("");
-  // const [branch, setBranch] = useState("");
-  // const [year, setYear] = useState("");
-  // const [round, setRound] = useState("");
-  // const [exam, setExam] = useState("");
-
   const limit = useRef(7);
   
   const selectRoundsByYear = (year) => {
-		// console.log(year);
 		const round = yearData[year];
 		setSelectedRound(round);
-		// console.log("Round: ", round);
 	};
+
+  const setCategoryListByYear = (year) => {
+    // useGetCategoryList(setCategories, setCategory);
+  }
 
   // ######################## Submit Handler ########################
   const submitHandler = (e) => {
 		e.preventDefault();
 		setIsLoading(true);
     console.log("Query response length: ", qResponse.length);
-		// setShowSidebar(false);
 
 		// queryString => gender/category/percentile/rank/college/branch/year/round
 		let queryString = `${gender}/${category.toLowerCase()}/${
@@ -108,15 +89,12 @@ const QueryPage = () => {
       limit,
 			setIsLoading
 		);
-
-    
 	};
 
   useEffect(() => {
     if (!userLoggedIn) {
       navigate("/");
     }
-    // useGetQueryData(queryString, setQResponse);
 		useGetBranchList(setBranches);
 		useGetCollegeList(setColleges);
 		useGetCategoryList(setCategories, setCategory);
@@ -128,18 +106,14 @@ const QueryPage = () => {
 		);
   }, []);
 
-  const [categoryVisibility, setCategoryVisibility] = useState(true);
-  const [roundVisibility, setRoundVisibility] = useState(true);
-
   return (
     <div className="queryform-div">
       {/* ############## Conditional navigation to mainpage ############## */}
-      {qResponse.length > 0 && navigate('/mainpage')}
+      {qResponse?.length > 0 && navigate('/mainpage')}
 
-      <div className="form-container">
+      <div className="relative form-container">
+        {isLoading && <QueryPageShimmer />}
         <form
-          // action="/main/query"
-          // method="GET"
           onSubmit={submitHandler}
         >
           <h1 className="heading">Enter Your Details</h1>
@@ -205,6 +179,7 @@ const QueryPage = () => {
                 </option>
               </select>
             </div>
+            <div className="or-text-transparent">OR</div>
 
             <div className="form-group">
               <label htmlFor="numRows">Result Display Limit:</label>
@@ -232,6 +207,7 @@ const QueryPage = () => {
                 onChange={(e) => {
                   setYear(e.target.value)
                   selectRoundsByYear(e.target.value);
+                  setCategoryListByYear(e.target.value);
                 }}
               >
                 {yearList.map((year) => (
@@ -239,6 +215,7 @@ const QueryPage = () => {
                 ))}
               </select>
             </div>
+            <div className="or-text-transparent">OR</div>
 
             <div className="form-group">
               <label htmlFor="gender">Gender: </label>
@@ -262,7 +239,7 @@ const QueryPage = () => {
             <div className="form-group">
               <label
                 htmlFor="round"
-                style={{ display: roundVisibility ? "block" : "none" }}
+                // style={{ display: roundVisibility ? "block" : "none" }}
                 id="roundLabel"
               >
                 Select Round:
@@ -291,10 +268,12 @@ const QueryPage = () => {
                 })()}
 					</select>
             </div>
+
+            <div className="or-text-transparent">OR</div>
             <div className="form-group">
               <label
                 htmlFor="category"
-                style={{ display: categoryVisibility ? "block" : "none" }}
+                // style={{ display: categoryVisibility ? "block" : "none" }}
                 id="categoryLabel"
               >
                 Select Category:
@@ -302,7 +281,7 @@ const QueryPage = () => {
               <select
                 className="query-input"
                 id="category"
-                style={{ display: categoryVisibility ? "block" : "none" }}
+                // style={{ display: categoryVisibility ? "block" : "none" }}
                 onChange={(e) => {setCategory(e.target.value)}}
               >
                 {categories.map((category) => (
@@ -365,19 +344,13 @@ const QueryPage = () => {
             />
 
             <div className="button-container">
-              {/* <Link
-                to="/mainpage"
-                element={<MainPage queryString={queryString} />}
-              > */}
                 <button
                   type="submit"
                   className="bg-white text-black submit-button hover:shadow-xl hover:text-white transition duration-300 mt-5"
-                  // onClick={() => <Link to="/mainpage" element={<MainPage />} />}
                   onClick={() => submitHandler}
                 >
                   GET RESULTS
                 </button>
-              {/* </Link> */}
             </div>
           </div>
         </form>

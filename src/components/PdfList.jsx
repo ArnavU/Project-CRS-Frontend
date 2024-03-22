@@ -84,7 +84,7 @@ function PdfList({ setReload, reload }) {
 
 	return (
 		<div className="pdf-list">
-			{isLoading && <UploadingShimmer />}
+			{/* {isLoading && <UploadingShimmer />} */}
 			
 				{pdfs?.map((pdf, index) => (
 					<div key={`${pdf.year}${pdf.round}`} className="pdf-card">

@@ -130,7 +130,7 @@ body {
 }
 
 .screen-div {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   height: 100vh;
   margin: auto;
   background: var(--file-background-color);
@@ -164,8 +164,10 @@ body {
 }
 
 h3 {
-  margin-top: 22px;
+  margin-top: 5px;
   color: var(--heading-color);
+  font-weight: bolder;
+  margin-bottom: 5px;
 }
 
 p {
@@ -221,7 +223,7 @@ input::file-selector-button {
   background: #eeeeee;
   margin-top: 15px;
   margin-inline: 10px;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 
@@ -262,14 +264,16 @@ input::file-selector-button {
 }
 
 .pdf-card {
+  font-size: 1.3rem;
   margin-top: 25px;
   margin-left: 25px;
   background: var(--file-upload-div-color);
   padding: 20px;
   border-radius: 20px;
   box-shadow: var(--shadow);
-  min-width: 400px;
+  min-width: 370px;
   backdrop-filter: blur(25px);
+  height: 238px;
 }
 
 
@@ -355,10 +359,11 @@ input::file-selector-button {
   padding: 20px;
   border-radius: 20px;
   box-shadow: var(--shadow);
-  min-width: 400px;
+  min-width: 370px;
   background-size: 300%;
   background-position-x: 100%;
   animation: shimmer 2s infinite;
+  height: 238px;
 }
 
 .pdf-card-shimmer p,
@@ -382,6 +387,7 @@ input::file-selector-button {
   transition-duration: 0.2s;
   font-weight: bolder;
   font-size: 1.1rem;
+
 }
 
 
@@ -393,21 +399,21 @@ input::file-selector-button {
 
 
 @media (orientation: portrait) {
-  .pdf-card {
+  /* .pdf-card {
     margin-top: 25px;
     padding: 20px;
     border-radius: 20px;
     box-shadow: var(--shadow);
     margin-left: 25px;
     min-width: auto;
-  }
+  } */
 
   .file-upload-div {
-    width: 80%;
+    width: 90%;
   }
 
-  .pdf-card-shimmer {
+  /* .pdf-card-shimmer {
     min-width: auto;
-  }
+  } */
 
 }

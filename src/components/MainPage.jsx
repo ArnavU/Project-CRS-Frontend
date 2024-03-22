@@ -10,17 +10,8 @@ import useGetYearList from "../hooks/useGetYearData.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 import useGetBranchList from "../hooks/useGetBranchList.jsx";
-import {
-	BRANCH_LIST_URL,
-	CATEGORY_LIST_URL,
-	COLLEGE_LIST_URL,
-} from "../utils/constants.js";
 import Loader from "./Loader.jsx";
 import { QueryContext } from "../contexts/queryContext.jsx";
-
-let collegeListURL = COLLEGE_LIST_URL;
-let branchListURL = BRANCH_LIST_URL;
-let categoryURL = CATEGORY_LIST_URL;
 
 const MainPage = () => {
 	const { userLoggedIn } = useAuth();
@@ -31,8 +22,6 @@ const MainPage = () => {
 		setPercentile,
 		rank,
 		setRank,
-		year,
-		setYear,
 		category,
 		setCategory,
 		round,
@@ -60,7 +49,7 @@ const MainPage = () => {
 		setYearList,
 		selectedYear,
 		setSelectedYear,
-		selectedRound,
+		selectedRound, // no. of rounds in the year
 		setSelectedRound,
 		defaultDisplayLimit,
 	} = useContext(QueryContext);
@@ -224,10 +213,11 @@ const MainPage = () => {
 					<select
 						className="query-input"
 						id="year"
-						value={year}
+						value={selectedYear}
 						onChange={(e) => {
-							setYear(e.target.value);
+							setSelectedYear(e.target.value);
 							selectRoundsByYear(e.target.value);
+							// setCategoryListByYear(e.target.value);
 						}}
 					>
 						{yearList.map((year) => (
@@ -321,6 +311,7 @@ const MainPage = () => {
 					<select
 						id="branch"
 						className="query-input"
+            value={branch}
 						onChange={(e) => setBranch(e.target.value)}
 					>
 						<option value={"null"}>All Branches</option>

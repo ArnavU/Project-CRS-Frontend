@@ -3,7 +3,6 @@ import FileUpload from "./FileUpload";
 import PdfList from "./PdfList";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
-import useCheckUserLoggedIn from "../hooks/useCheckUserLoggedIn";
 
 const Admin = () => {
   const [reload, setReload] = useState(false);
