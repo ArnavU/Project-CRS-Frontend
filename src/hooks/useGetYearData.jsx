@@ -54,6 +54,8 @@ const useGetYearList = async (
   setYearDataList(yearsData);
   setYearList(yearList);
   console.log("YearList: ", yearList);
+  console.log("Selected Year: ", yearList[0])
+  console.log("Selected Round: ", yearsData[yearList[0]])
 
   setSelectedYear(yearList[0]); // Select the first year (which will be the latest now)
   setSelectedRound(yearsData[yearList[0]]);

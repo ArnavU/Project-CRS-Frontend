@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import MainPage from "./MainPage";
 import "../Styles/MainPage.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +8,12 @@ import {
   CATEGORY_LIST_URL,
   COLLEGE_LIST_URL,
 } from "../utils/constants";
+import { QueryContext } from "../contexts/queryContext";
+import useGetQueryData from "../hooks/useGetQueryData";
+import useGetBranchList from "../hooks/useGetBranchList";
+import useGetCollegeList from "../hooks/useGetCollegeList";
+import useGetCategoryList from "../hooks/useGetCategoryList";
+import useGetYearList from "../hooks/useGetYearData";
 
 let collegeListURL = COLLEGE_LIST_URL;
 let branchListURL = BRANCH_LIST_URL;
@@ -19,10 +25,46 @@ const QueryPage = () => {
 
   // let queryString = "Hi";
   const [queryString, setQueryString] = useState("Hi");
+  const [isLoading, setIsLoading] = useState(false);
   //Data fetched from API
-  const [colleges, setColleges] = useState([]);
-  const [branches, setBranches] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const {
+    percentile,
+    setPercentile,
+    rank, 
+    setRank,
+    year, 
+    setYear,
+    category,
+    setCategory,
+    round, 
+    setRound,
+    gender,
+    setGender,
+    branch, 
+    setBranch,
+    collegeName,
+    setCollegeName,
+
+		qResponse,
+		setQResponse,
+		tempQResponse,
+		setTempQResponse,
+		colleges,
+		setColleges,
+		branches,
+		setBranches,
+		categories,
+		setCategories,
+		yearData,
+		setYearData,
+		yearList,
+		setYearList,
+		selectedYear,
+		setSelectedYear,
+		selectedRound,
+		setSelectedRound,
+		defaultDisplayLimit,
+	} = useContext(QueryContext);
 
   //For Filtering user input
   // const [gender, setGender] = useState("");
@@ -35,64 +77,55 @@ const QueryPage = () => {
   // const [round, setRound] = useState("");
   // const [exam, setExam] = useState("");
 
-  const gender = useRef();
-  const category = useRef("");
-  const percentile = useRef("");
-  const rank = useRef("");
-  const college = useRef("");
-  const branch = useRef("");
-  const year = useRef("");
-  const round = useRef("");
-  // const [exam, setExam] = useState("");
+  const limit = useRef(7);
+  
+  const selectRoundsByYear = (year) => {
+		// console.log(year);
+		const round = yearData[year];
+		setSelectedRound(round);
+		// console.log("Round: ", round);
+	};
 
-  const fetchCollegeData = async () => {
-    try {
-      const response = await fetch(collegeListURL);
-      const data = await response.json();
-      setColleges(data.data);
-      // console.log(data.data);
-    } catch (error) {
-      console.error("Error fetching colleges:", error);
-    }
-  };
+  // ######################## Submit Handler ########################
+  const submitHandler = (e) => {
+		e.preventDefault();
+		setIsLoading(true);
+    console.log("Query response length: ", qResponse.length);
+		// setShowSidebar(false);
 
-  const fetchBranchData = async () => {
-    try {
-      const response = await fetch(branchListURL);
-      const branchesData = await response.json();
-      // console.log(branchesData.data);
-      setBranches(branchesData.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const fetchCategories = async () => {
-    try {
-      const response = await fetch(categoryURL);
-      const categoryData = await response.json();
-      console.log(categoryData);
-      setCategories(categoryData.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+		// queryString => gender/category/percentile/rank/college/branch/year/round
+		let queryString = `${gender}/${category.toLowerCase()}/${
+			percentile ? percentile : "null"
+		}/${rank ? rank : "null"}/${
+			collegeName || "null"
+		}/${branch}/${selectedYear}/${selectedRound}`;
+		console.log("querystring in QueryPage is  " + queryString);
 
-  const submitHandler = () => {
-    // e.preventDefault();
-    console.log("Form Submitted");
-    let queryString = `${gender}/${category.current.value}/${percentile.current.value}/${rank.current.value}/${college.current.value}/${branch.current.value}/${year.current.value}/${round.current.value}`;
-    setQueryString(queryString);
-    console.log("Query string queryPage: ", queryString);
-    // navigate('/')
-  };
+		useGetQueryData(
+			queryString,
+			setQResponse,
+			setTempQResponse,
+      limit,
+			setIsLoading
+		);
+
+    
+	};
 
   useEffect(() => {
     if (!userLoggedIn) {
       navigate("/");
     }
-    fetchCollegeData();
-    fetchBranchData();
-    fetchCategories();
+    // useGetQueryData(queryString, setQResponse);
+		useGetBranchList(setBranches);
+		useGetCollegeList(setColleges);
+		useGetCategoryList(setCategories, setCategory);
+		useGetYearList(
+			setYearData,
+			setYearList,
+			setSelectedYear,
+			setSelectedRound
+		);
   }, []);
 
   const [categoryVisibility, setCategoryVisibility] = useState(true);
@@ -100,6 +133,9 @@ const QueryPage = () => {
 
   return (
     <div className="queryform-div">
+      {/* ############## Conditional navigation to mainpage ############## */}
+      {qResponse.length > 0 && navigate('/mainpage')}
+
       <div className="form-container">
         <form
           // action="/main/query"
@@ -113,14 +149,13 @@ const QueryPage = () => {
 
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="percentile">Percentile:</label>
+              <label >Percentile:</label>
               <input
                 className="query-input"
-                type="text"
-                name="percentile"
                 id="percentile"
                 placeholder="Ex. 87.1234567"
-                ref={percentile}
+                value={percentile}
+                onChange={(e) => {setPercentile(e.target.value)}}
                 // onInput={(event) => {
                 //   clearFlash();
                 //   limitDecimalPlaces(event);
@@ -138,7 +173,8 @@ const QueryPage = () => {
                 name="rank"
                 id="rank"
                 placeholder="Ex. 5400"
-                ref={rank}
+                value={rank}
+                onChange={(e) => {setRank(e.target.value)}}
                 // onInput={(event) => {
                 //   clearFlash();
                 //   limitDigits(event);
@@ -177,9 +213,10 @@ const QueryPage = () => {
                 type="number"
                 name="numRows"
                 id="numRows"
-                defaultValue="7"
                 step="1"
                 min="1"
+                defaultValue={defaultDisplayLimit}
+                ref={limit}
               />
             </div>
           </div>
@@ -192,14 +229,14 @@ const QueryPage = () => {
                 className="query-input"
                 name="year"
                 id="year"
-                ref={year}
-                // style={{ display: roundVisibility ? "block" : "none" }}
+                onChange={(e) => {
+                  setYear(e.target.value)
+                  selectRoundsByYear(e.target.value);
+                }}
               >
-                {console.log(year)}
-                <option defaultValue="2022">2022</option>
-                <option defaultValue="2021">2021</option>
-                <option defaultValue="2020">2020</option>
-                <option defaultValue="2019">2019</option>
+                {yearList.map((year) => (
+                  <option key={year} value={year}>{year}</option>
+                ))}
               </select>
             </div>
 
@@ -211,13 +248,12 @@ const QueryPage = () => {
                 className="query-input"
                 name="gender"
                 id="gender"
-                ref={gender}
+                onChange={(e) =>{ setGender(e.target.value); console.log("e.target: ", e.target)}}
                 // style={{ display: roundVisibility ? "block" : "none" }}
               >
-                {console.log(gender)}
-                <option defaultValue="male">Male</option>
-                <option defaultValue="female">Female</option>
-                <option defaultValue="other">Other</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option vaalue="other">Other</option>
               </select>
             </div>
           </div>
@@ -232,16 +268,28 @@ const QueryPage = () => {
                 Select Round:
               </label>
               <select
-                className="query-input"
-                name="round"
                 id="round"
-                ref={round}
-                style={{ display: roundVisibility ? "block" : "none" }}
+                className="hide query-input"
+                style={{ display: "block" }}
+                // value={round}
+                onChange={(e) => {setRound(e.target.value); console.log("Round: ", e.target.value)}}
               >
-                <option defaultValue="round1">Round 1</option>
-                <option defaultValue="round2">Round 2</option>
-                <option defaultValue="round3">Round 3</option>
-              </select>
+                {(() => {
+                  let arrOfRounds = [];
+                  for (let i = 1; i <= selectedRound; i++) {
+                    arrOfRounds.push(i);
+                  }
+
+                  return arrOfRounds.map((round, index) => {
+                    return (
+                      <option
+                        key={index}
+                        value={round}
+                      >{`Round ${round}`}</option>
+                    );
+                  });
+                })()}
+					</select>
             </div>
             <div className="form-group">
               <label
@@ -254,12 +302,15 @@ const QueryPage = () => {
               <select
                 className="query-input"
                 id="category"
-                name="category"
                 style={{ display: categoryVisibility ? "block" : "none" }}
-                ref={category}
+                onChange={(e) => {setCategory(e.target.value)}}
               >
                 {categories.map((category) => (
-                  <option key={category}>{category}</option>
+                  <option key={category}
+                  value={category}
+                  >
+                    {category}
+                  </option>
                 ))}
               </select>
             </div>
@@ -272,11 +323,11 @@ const QueryPage = () => {
                 name="branch"
                 id="branch"
                 className="query-input"
-                ref={branch}
+                onChange={(e) => setBranch(e.target.value)}
               >
-                <option>All branches</option>
+                <option value={"null"}>All branches</option>
                 {branches.map((branchItem) => (
-                  <option key={branchItem}>{branchItem}</option>
+                  <option key={branchItem} value={branchItem}>{branchItem}</option>
                 ))}
               </select>
             </div>
@@ -292,11 +343,11 @@ const QueryPage = () => {
                 id="collegeSearch"
                 list="collegesList"
                 placeholder="Start typing..."
-                ref={college}
+                onChange={(e) => setCollegeName(e.target.value)}
               />
               <datalist id="collegesList">
                 {colleges.map((item, key) => (
-                  <option key={key}>{item}</option>
+                  <option key={key} value={item}>{item}</option>
                 ))}
                 <option>colleges</option>
               </datalist>
@@ -314,19 +365,19 @@ const QueryPage = () => {
             />
 
             <div className="button-container">
-              <Link
+              {/* <Link
                 to="/mainpage"
                 element={<MainPage queryString={queryString} />}
-              >
+              > */}
                 <button
                   type="submit"
                   className="bg-white text-black submit-button hover:shadow-xl hover:text-white transition duration-300 mt-5"
                   // onClick={() => <Link to="/mainpage" element={<MainPage />} />}
-                  onClick={() => submitHandler()}
+                  onClick={() => submitHandler}
                 >
                   GET RESULTS
                 </button>
-              </Link>
+              {/* </Link> */}
             </div>
           </div>
         </form>

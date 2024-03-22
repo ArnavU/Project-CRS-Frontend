@@ -13,27 +13,30 @@ import Login from "../auth/login";
 import Register from "../auth/register";
 import { AuthProvider } from "../contexts/authContext";
 import Header from "./Header";
+import { QueryProvider } from "../contexts/queryContext";
 
 const App = () => {
 	const [isLogin, setIsLogin] = useState(false);
 	return (
 		<>
 			<AuthProvider>
-				<BrowserRouter>
-        			<Header />
-					<Routes>
-						<Route path="/" element={<Login />} />
-						<Route path="/register" element={<Register />} />
-						<Route path="/querypage" element={<QueryPage />} />
-						<Route path="/mainpage" element={<MainPage />} />
-						<Route path="/Admin" element={<Admin />} />
-						{/* <Route
+				<QueryProvider>
+					<BrowserRouter>
+						<Header />
+						<Routes>
+							<Route path="/" element={<Login />} />
+							<Route path="/register" element={<Register />} />
+							<Route path="/querypage" element={<QueryPage />} />
+							<Route path="/mainpage" element={<MainPage />} />
+							<Route path="/Admin" element={<Admin />} />
+							{/* <Route
             path="querypage"
             element={isLogin ? <QueryPage /> : <LoginPage />}
-          /> */}
-					</Routes>
-				</BrowserRouter>
-				<ThemeToggle />
+		/> */}
+						</Routes>
+					</BrowserRouter>
+					<ThemeToggle />
+				</QueryProvider>
 			</AuthProvider>
 		</>
 	);

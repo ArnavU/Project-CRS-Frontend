@@ -4,7 +4,7 @@ const useGetQueryData = async (
   queryString,
   setQResponse,
   setTempQResponse,
-  defaultDisplayLimit,
+  limit,
   setIsLoading
 ) => {
   // console.log("Query String: ", queryString);
@@ -14,10 +14,12 @@ const useGetQueryData = async (
   );
   const data = await response.json();
 
-  setQResponse(data.data);
+  setQResponse(data?.data);
+  console.log("Query Response: ", data.data);
   setTempQResponse(
-    data.data.filter((ele, index) => {
-      return index < defaultDisplayLimit;
+    data?.data.filter((ele, index) => {
+      return index < limit.current.value;
+      return index < 7;
     })
   );
   setIsLoading(false);
