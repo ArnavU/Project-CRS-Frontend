@@ -271,7 +271,7 @@ input::file-selector-button {
   padding: 20px;
   border-radius: 20px;
   box-shadow: var(--shadow);
-  min-width: 400px;
+  min-width: 370px;
   backdrop-filter: blur(25px);
   height: 238px;
 }
@@ -359,7 +359,7 @@ input::file-selector-button {
   padding: 20px;
   border-radius: 20px;
   box-shadow: var(--shadow);
-  min-width: 400px;
+  min-width: 370px;
   background-size: 300%;
   background-position-x: 100%;
   animation: shimmer 2s infinite;
@@ -398,22 +398,22 @@ input::file-selector-button {
 }
 
 
-/* @media (orientation: portrait) {
-  .pdf-card {
+@media (orientation: portrait) {
+  /* .pdf-card {
     margin-top: 25px;
     padding: 20px;
     border-radius: 20px;
     box-shadow: var(--shadow);
     margin-left: 25px;
     min-width: auto;
-  }
+  } */
 
   .file-upload-div {
-    width: 80%;
+    width: 90%;
   }
 
-  .pdf-card-shimmer {
+  /* .pdf-card-shimmer {
     min-width: auto;
-  }
+  } */
 
-} */
+}
