@@ -140,13 +140,11 @@ body {
 }
 
 .admin-panel-heading {
-  font-size: 2rem;
   margin: auto;
   text-align: center;
   padding: 5px;
   color: var(--admin-panel-heading-color);
   margin-bottom: 12px;
-  font-weight: bolder;
 
 }
 
@@ -389,6 +387,7 @@ input::file-selector-button {
   transition-duration: 0.2s;
   font-weight: bolder;
   font-size: 1.1rem;
+
 }
 
 
@@ -399,7 +398,7 @@ input::file-selector-button {
 }
 
 
-@media (orientation: portrait) {
+/* @media (orientation: portrait) {
   .pdf-card {
     margin-top: 25px;
     padding: 20px;
@@ -417,4 +416,4 @@ input::file-selector-button {
     min-width: auto;
   }
 
-}
+} */
