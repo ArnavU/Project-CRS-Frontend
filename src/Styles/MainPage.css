@@ -339,7 +339,7 @@ select {
     top: 51px;
     left: -450px;
     max-width: 420px;
-    max-height: 90%;
+    min-height: 90%;
     transition: all 0.5s ease;
     margin: 6px;
     z-index: 20;
