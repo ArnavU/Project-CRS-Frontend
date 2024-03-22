@@ -35,7 +35,7 @@ const QueryPage = () => {
   // const [round, setRound] = useState("");
   // const [exam, setExam] = useState("");
 
-  const gender = "female";
+  const gender = useRef();
   const category = useRef("");
   const percentile = useRef("");
   const rank = useRef("");
@@ -181,6 +181,44 @@ const QueryPage = () => {
                 step="1"
                 min="1"
               />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="year">Year: </label>
+              {/* select year */}
+              <select
+                className="query-input"
+                name="year"
+                id="year"
+                ref={year}
+                // style={{ display: roundVisibility ? "block" : "none" }}
+              >
+                {console.log(year)}
+                <option defaultValue="2022">2022</option>
+                <option defaultValue="2021">2021</option>
+                <option defaultValue="2020">2020</option>
+                <option defaultValue="2019">2019</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="gender">Gender: </label>
+
+              {/* select gender */}
+              <select
+                className="query-input"
+                name="gender"
+                id="gender"
+                ref={gender}
+                // style={{ display: roundVisibility ? "block" : "none" }}
+              >
+                {console.log(gender)}
+                <option defaultValue="male">Male</option>
+                <option defaultValue="female">Female</option>
+                <option defaultValue="other">Other</option>
+              </select>
             </div>
           </div>
 

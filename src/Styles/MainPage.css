@@ -339,7 +339,7 @@ select {
     top: 51px;
     left: -450px;
     max-width: 420px;
-    min-height: 90%;
+    max-height: 90%;
     transition: all 0.5s ease;
     margin: 6px;
     z-index: 20;
@@ -512,9 +512,8 @@ label #cancel {
 }
 
 .admin-button {
-    margin-top: 10px;
-    margin-right: 15px;
-    /* z-index: 20; */
+    margin-top: -71px;
+    margin-right: 49px;
 }
 
 
