@@ -44,6 +44,7 @@
   --bg-color-of-theme-toggle: black;
   --icon-color-of-theme-toggle: rgb(255, 255, 255);
 
+  --delete-pdf-card-bg-color: rgba(31, 31, 31)
 }
 
 [data-theme="dark"] {
@@ -80,6 +81,10 @@
   /*colors for theme toggle icon*/
   --bg-color-of-theme-toggle: white;
   --icon-color-of-theme-toggle: rgb(0, 0, 0);
+
+
+
+  --delete-pdf-card-bg-color: rgba(31, 31, 31, 0.561)
 }
 
 .admin-exam-option {
@@ -145,7 +150,7 @@ body {
   padding: 5px;
   color: var(--admin-panel-heading-color);
   margin-bottom: 12px;
-
+  font-weight: 700;
 }
 
 
@@ -274,6 +279,36 @@ input::file-selector-button {
   min-width: 370px;
   backdrop-filter: blur(25px);
   height: 238px;
+}
+
+.delete-pdf--card {
+  font-size: 1.3rem;
+  background-color: var(--delete-pdf-card-bg-color);
+  /* background-color: rgba(31, 31, 31, 0.561); */
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  min-width: 370px;
+  backdrop-filter: blur(15px);
+  height: 238px;
+}
+
+.delete-pdf--card-cross-icon {
+  position: absolute;
+  cursor: pointer;
+  left: 310px;
+  background-color: #141414;
+  padding: 10px;
+  color: white;
+  font-weight: bolder;
+  display: inline-block;
+  border-radius: 17px;
+}
+
+.verification-form {
+  padding-top: 20px;
+  /* background-color: rgba(255, 255, 255, 0.262); */
+  /* backdrop-filter: blur(8px); */
 }
 
 
