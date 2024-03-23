@@ -5,7 +5,8 @@ const useGetQueryData = async (
   setQResponse,
   setTempQResponse,
   limit,
-  setIsLoading
+  setIsLoading,
+  setErrorUserInput,
 ) => {
   // console.log("Query String: ", queryString);
   // setIsLoading(true);
@@ -16,12 +17,19 @@ const useGetQueryData = async (
 
   setQResponse(data?.data);
   console.log("Query Response: ", data.data);
-  setTempQResponse(
-    data?.data.filter((ele, index) => {
-      return index < limit.current.value;
-      return index < 7;
-    })
-  );
+
+  if(data.success && data.data.length > 0) {
+    setTempQResponse(
+      data?.data.filter((ele, index) => {
+        return index < limit.current.value;
+      })
+    );
+  }
+  else if(!data.success || data.data.length==0) {
+    setTempQResponse([]);
+    setErrorUserInput(data?.userInput);
+    console.log("length 0 ")
+  }
   setIsLoading(false);
 };
 

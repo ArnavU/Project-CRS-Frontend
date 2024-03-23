@@ -16,6 +16,11 @@ import { QueryContext } from "../contexts/queryContext.jsx";
 const MainPage = () => {
   const { userLoggedIn } = useAuth();
   const navigate = useNavigate();
+  
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [errorUserInput, setErrorUserInput] = useState(null);
 
   const {
     percentile,
@@ -54,7 +59,7 @@ const MainPage = () => {
     selectedRound, // no. of rounds in the year
     setSelectedRound,
     defaultDisplayLimit,
-	setDefaultDisplayLimit,
+	  setDefaultDisplayLimit,
   } = useContext(QueryContext);
 
   const limit = useRef(7);
@@ -85,12 +90,9 @@ const MainPage = () => {
     setRank(value.slice(0, 5));
   };
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-
   const submitHandler = (e) => {
     setErrorMessage(null);
+    setErrorUserInput(null);
     e.preventDefault();
 
     if (!percentile) {
@@ -115,7 +117,8 @@ const MainPage = () => {
       setQResponse,
       setTempQResponse,
       limit,
-      setIsLoading
+      setIsLoading,
+      setErrorUserInput,
     );
   };
 
@@ -410,6 +413,22 @@ const MainPage = () => {
         <Loader />
       ) : (
         <div className="table-container">
+          {errorUserInput &&
+            <div className="mb-[20px] mx-2">
+              <p className="text-center font-bold text-red-600">Cannot get the result for the following request: </p>
+              <p className="text-center">
+                {errorUserInput.gender!="null" && <span className="font-bold whitespace-nowrap">Gender: <span className="text-red-600">{gender}</span>,</span>}{" "}
+                {errorUserInput.category && <span className="font-bold whitespace-nowrap">Category: <span className="text-red-600">{category}</span>,</span>}{" "}
+                {errorUserInput.percentile!="null" && <span className="font-bold whitespace-nowrap">Percentile: <span className="text-red-600">{percentile}</span>,</span>}{" "} 
+                {errorUserInput.rank!="null" && <span className="font-bold whitespace-nowrap">Rank: <span className="text-red-600">{rank}</span>,</span>}{" "}
+                {errorUserInput.college!="null" && <span className="font-bold whitespace-nowrap">College: <span className="text-red-600">{collegeName}</span>,</span>}{" "}
+                {errorUserInput.branch!="null" && <span className="font-bold whitespace-nowrap">Branch: <span className="text-red-600">{branch}</span>,</span>}{" "}
+                {errorUserInput.year && <span className="font-bold whitespace-nowrap">Year: <span className="text-red-600">{selectedYear}</span>,</span>}{" "}
+                {errorUserInput.round && <span className="font-bold whitespace-nowrap">Round: <span className="text-red-600">{selectedRound}</span>,</span>}{" "}
+              </p>
+            </div>
+          }
+
           {/* table */}
           <p
             id="flash_branch_not_available"

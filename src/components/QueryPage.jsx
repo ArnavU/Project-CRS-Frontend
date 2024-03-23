@@ -15,9 +15,10 @@ const QueryPage = () => {
   const { userLoggedIn } = useAuth();
   const navigate = useNavigate();
 
-  // let queryString = "Hi";
-  const [queryString, setQueryString] = useState("Hi");
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorUserInput, setErrorUserInput] = useState(null);
+
   //Data fetched from API
   const {
     percentile,
@@ -98,10 +99,15 @@ const QueryPage = () => {
 
   // ######################## Submit Handler ########################
   const submitHandler = (e) => {
+    setErrorMessage(null);
     e.preventDefault();
+    
+    if (!percentile) {
+      setErrorMessage("Enter percentile/rank");
+      return;
+    }
     setIsLoading(true);
-    console.log("Query response length: ", qResponse.length);
-
+    
     // queryString => gender/category/percentile/rank/college/branch/year/round
     let queryString = `${gender}/${category.toLowerCase()}/${
       percentile ? percentile : "null"
@@ -115,7 +121,8 @@ const QueryPage = () => {
       setQResponse,
       setTempQResponse,
       limit,
-      setIsLoading
+      setIsLoading,
+      setErrorUserInput,
     );
   };
 
@@ -123,24 +130,48 @@ const QueryPage = () => {
     if (!userLoggedIn) {
       navigate("/");
     }
-    useGetBranchList(setBranches);
-    useGetCollegeList(setColleges);
-    useGetCategoryList(setCategories, setCategory);
-    useGetYearList(setYearData, setYearList, setSelectedYear, setSelectedRound);
-  }, []);
+    if(!selectedRound) {
+      useGetBranchList(setBranches);
+      useGetCollegeList(setColleges);
+      useGetCategoryList(setCategories, setCategory);
+      useGetYearList(setYearData, setYearList, setSelectedYear, setSelectedRound);
+    }
+    useGetCategoryList(setCategories, setCategory, selectedYear);
+  }, [selectedRound]);
 
   return (
     <div className="queryform-div">
       {/* ############## Conditional navigation to mainpage ############## */}
       {qResponse?.length > 0 && navigate("/mainpage")}
 
-      <div className="relative form-container">
+      <div className="relative form-container lg:w-[45vw] md:w-[70vw]">
         {isLoading && <QueryPageShimmer />}
         <form onSubmit={submitHandler}>
-          <h1 className="heading">Enter Your Details</h1>
-          <p id="flash-message" style={{ display: "none", color: "red" }}>
-            Please fill Percentile or Rank
-          </p>
+          <h1 className="heading font-bold text-lg">Enter Your Details</h1>
+          {errorMessage && (
+            <p
+              id="flash-message"
+              className="text-red-600 font-bold text-center"
+            >
+              {errorMessage}
+            </p>
+          )}
+
+          {errorUserInput &&
+            <div className="mb-[20px]">
+              <p className="text-center font-bold text-red-600">Cannot get the result for the following request: </p>
+              <p className="text-center">
+                {errorUserInput.gender!="null" && <span className="font-bold whitespace-nowrap">Gender: <span className="text-red-600">{gender}</span>,</span>}{" "}
+                {errorUserInput.category && <span className="font-bold whitespace-nowrap">Category: <span className="text-red-600">{category}</span>,</span>}{" "}
+                {errorUserInput.percentile!="null" && <span className="font-bold whitespace-nowrap">Percentile: <span className="text-red-600">{percentile}</span>,</span>}{" "} 
+                {errorUserInput.rank!="null" && <span className="font-bold whitespace-nowrap">Rank: <span className="text-red-600">{rank}</span>,</span>}{" "}
+                {errorUserInput.college!="null" && <span className="font-bold whitespace-nowrap">College: <span className="text-red-600">{collegeName}</span>,</span>}{" "}
+                {errorUserInput.branch!="null" && <span className="font-bold whitespace-nowrap">Branch: <span className="text-red-600">{branch}</span>,</span>}{" "}
+                {errorUserInput.year && <span className="font-bold whitespace-nowrap">Year: <span className="text-red-600">{selectedYear}</span>,</span>}{" "}
+                {errorUserInput.round && <span className="font-bold whitespace-nowrap">Round: <span className="text-red-600">{selectedRound}</span>,</span>}{" "}
+              </p>
+            </div>
+          }
 
           <div className="form-row">
             <div className="form-group">
@@ -161,7 +192,7 @@ const QueryPage = () => {
               />
             </div>
 
-            <div className="or-text">OR</div>
+            <div className="or-text pt-[20px]">OR</div>
 
             <div className="form-group">
               <label htmlFor="rank">Rank:</label>
@@ -233,9 +264,9 @@ const QueryPage = () => {
                 name="year"
                 id="year"
                 onChange={(e) => {
-                  setYear(e.target.value);
+                  setSelectedYear(e.target.value);
                   selectRoundsByYear(e.target.value);
-                  setCategoryListByYear(e.target.value);
+                  // setCategoryListByYear(e.target.value);
                 }}
               >
                 {yearList.map((year) => (
@@ -318,6 +349,7 @@ const QueryPage = () => {
                 className="query-input"
                 id="category"
                 // style={{ display: categoryVisibility ? "block" : "none" }}
+                value={category}
                 onChange={(e) => {
                   setCategory(e.target.value);
                   console.log(category);

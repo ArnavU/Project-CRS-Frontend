@@ -31,6 +31,9 @@ const useGetCategoryList = async (setCategories, setCategory, selectedYear) => {
   const data = await response.json();
   setCategories(data?.data);
   setCategory(data?.data[0]);
+
+  console.log("Category fetched: ", selectedYear);
+  console.log("CatList: ", data.data);
 };
 
 export default useGetCategoryList;
