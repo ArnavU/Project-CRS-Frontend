@@ -2,12 +2,21 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PdfListShimmer from "./PdfListShimmer";
 import useGetPdf from "../hooks/useGetPdf.jsx";
-import UploadingShimmer from "./UploadingShimmer.jsx";
+import useOpenPdf from "../hooks/useOpenPdf.jsx";
+import PasswordVerificationPopUp from "./PasswordVerificationPopUp.jsx";
 
 function PdfList({ setReload, reload }) {
 	const [pdfs, setPdfs] = useState([]);
 	const [shimmerQty, setShimmerQty] = useState(6);
 	const [isLoading, setIsLoading] = useState(true);
+	const [deletePdfId, setDeletePdfId] = useState("");
+
+	window.addEventListener('click', (e) => {
+		const element = e.target;
+		if(!element.closest('.verification-form') && !element.closest('.delete-btn')) {
+			setDeletePdfId("");
+		}
+	})
 
 	const fetchPdfs = async () => {
 		try {
@@ -57,29 +66,6 @@ function PdfList({ setReload, reload }) {
 		fetchPdfs();
 	}, [reload]);
 
-	const openPdf = (pdf) => {
-		try {
-			const pdfData = new Uint8Array(pdf.content.data);
-			const blob = new Blob([pdfData], { type: "application/pdf" });
-			const url = URL.createObjectURL(blob);
-			window.open(url, "_blank");
-		} catch (error) {
-			console.error("Error opening PDF:", error);
-		}
-	};
-
-	const deletePdf = async (year, round, exam, name) => {
-		try {
-			await axios.delete(
-				`${import.meta.env.VITE_SERVER_URL}/api/v1/pdf/delete/${year}/${round}/${exam}/${name}`
-			);
-			setReload(!reload);
-		} catch (err) {
-			console.log("Error Deleting pdf", err);
-		}
-	};
-
-	// Conditional rendering based on pdfs length
 	console.log("PdfList length: ", pdfs.length)
 
 	return (
@@ -87,33 +73,29 @@ function PdfList({ setReload, reload }) {
 			{/* {isLoading && <UploadingShimmer />} */}
 			
 				{pdfs?.map((pdf, index) => (
-					<div key={`${pdf.year}${pdf.round}`} className="pdf-card">
+					<div key={`${pdf._id}`} className="pdf-card">
 						<h3>{pdf.name}</h3>
 						<p>Year: {pdf.year}</p>
 						<p>Round: {pdf.round}</p>
 						<p>Exam: {pdf.exam}</p>
 						<button
 							className="view-pdf-button"
-							onClick={() => openPdf(pdf)}
+							onClick={() => useOpenPdf(pdf)}
 						>
 							View
 						</button>
-						
 
 						{isLoading ? <button>Delete</button> :
 							<button
-								className="delete-pdf-button"
-								onClick={() =>
-									deletePdf(
-										pdf.year,
-										pdf.round,
-										pdf.exam,
-										pdf.name
-									)
-								}
+								className="delete-pdf-button delete-btn"
+								onClick={() => setDeletePdfId(pdf._id)}
 							>
 								Delete
-						</button>
+							</button>
+						}
+
+						{deletePdfId == pdf._id &&
+							<PasswordVerificationPopUp pdf={pdf} setDeletePdfId={setDeletePdfId} setReload={setReload} reload={reload}/>
 						}
 					</div>
 				))
