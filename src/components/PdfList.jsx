@@ -92,14 +92,13 @@ function PdfList({ setReload, reload }) {
 						<p>Year: {pdf.year}</p>
 						<p>Round: {pdf.round}</p>
 						<p>Exam: {pdf.exam}</p>
-						{isLoading ? <button className="">View</button> : 
-							<button
-								className="view-pdf-button"
-								onClick={() => openPdf(pdf)}
-							>
-								View
-							</button>
-						}
+						<button
+							className="view-pdf-button"
+							onClick={() => openPdf(pdf)}
+						>
+							View
+						</button>
+						
 
 						{isLoading ? <button>Delete</button> :
 							<button

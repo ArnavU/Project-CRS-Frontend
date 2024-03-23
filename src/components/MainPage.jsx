@@ -120,15 +120,16 @@ const MainPage = () => {
 			useGetBranchList(setBranches);
 			useGetCollegeList(setColleges);
 			useGetCategoryList(setCategories, setCategory);
-
+			
 			useGetYearList(
 				setYearData,
 				setYearList,
 				setSelectedYear,
 				setSelectedRound
-			);
+				);
 		}
-	}, []);
+		useGetCategoryList(setCategories, setCategory, selectedYear);
+	}, [selectedRound]);
 
 	return (
 		<div className="maindiv">

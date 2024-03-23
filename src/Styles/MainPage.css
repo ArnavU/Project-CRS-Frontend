@@ -834,7 +834,7 @@ button:focus {
 }
 
 .profile-float {
-    z-index: 1000;
+    z-index: 100;
     background-color: #ffffff;
     box-shadow: var(--shadow);
     /* margin-right: 70px; */

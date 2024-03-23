@@ -51,7 +51,7 @@ function Header() {
             />
           )}
           {showUserDetails && (
-            <div className="flex flex-col absolute z-50 shadow-md rounded-md p-2 right-0 profile-float">
+            <div className="flex flex-col absolute z-[10] shadow-md rounded-md p-2 right-0 profile-float">
               <p className="text-[14px]">
                 {currentUser.displayName || userName}
               </p>

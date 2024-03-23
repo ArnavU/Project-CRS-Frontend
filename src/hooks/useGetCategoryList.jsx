@@ -4,19 +4,33 @@ import { QueryContext } from "../contexts/queryContext";
 import useGetLatestYear from "./useGetLatestYear";
 
 const getLatestYear = async() => {
+  const response = await fetch(YEAR_LIST);
+  let yearData = await response.json();
+  yearData = yearData.data;
+  console.log(yearData);
+
+
+  const years = Object.keys(yearData);
   
+  let maxYear = 0;
+  for(let year of years) {
+    if(year > maxYear) {
+      maxYear = year;
+    }
+  }
 
   return maxYear;
 }
 
-const useGetCategoryList = async (setCategories, setCategory) => {
+const useGetCategoryList = async (setCategories, setCategory, selectedYear) => {
+  const latestYear = await getLatestYear();
+  console.log("Latest year: ", latestYear)
 
-  const response = await fetch(`${CATEGORY_LIST_URL}/${2022}`);
+  const response = await fetch(`${CATEGORY_LIST_URL}/${selectedYear || latestYear}`);
+
   const data = await response.json();
   setCategories(data?.data);
   setCategory(data?.data[0]);
-  console.log("Category List: ", data.data);
-  return data?.data;
 };
 
 export default useGetCategoryList;
