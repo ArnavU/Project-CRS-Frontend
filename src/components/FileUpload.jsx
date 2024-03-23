@@ -3,6 +3,8 @@ import axios from "axios";
 import "../Styles/AdminIndex.css";
 import { HashLoader } from "react-spinners";
 import UploadingShimmer from "./UploadingShimmer";
+import useHandleUpload from "../hooks/useHandleUpload";
+import PasswordVerificationUpload from "./PasswordVerificationUpload";
 
 function FileUpload({ setReload }) {
 	const [selectedFile, setSelectedFile] = useState(null);
@@ -10,6 +12,20 @@ function FileUpload({ setReload }) {
 	const [year, setYear] = useState("");
 	const [round, setRound] = useState("");
 	const [isUploading, setIsUploading] = useState(false);
+	const [showAuthCard, setShowAuthCard] = useState(false);
+
+	if(showAuthCard && !selectedFile) {
+			alert("Please select a file");
+			setShowAuthCard(false);
+	}
+
+	window.addEventListener('click', (e) => {
+		const element = e.target;
+
+		if(!element.closest('.verification-form') && !element.closest('.upload-btn') && !element.closest('.themediv') || element.closest('.cross')) {
+			setShowAuthCard(false);
+		}
+	})
 
 	const handleFileChange = (event) => {
 		setSelectedFile(event.target.files[0]);
@@ -27,37 +43,6 @@ function FileUpload({ setReload }) {
 		setRound(event.target.value);
 	};
 
-	const handleUpload = async () => {
-		if (!selectedFile) {
-			alert("Please select a file");
-			return;
-		}
-
-		const formData = new FormData();
-		formData.append("pdfFile", selectedFile);
-
-		try {
-			console.log("Uploading Started");
-			setIsUploading(true);
-			const response = await axios.post(
-				`${
-					import.meta.env.VITE_SERVER_URL
-				}/api/v1/admin/pdf/${exam}/${year}/${round}`,
-				formData
-			);
-			console.log(response.request.status);
-			if (response.request.status == 200) {
-				alert("File uploaded successfully");
-				setReload((flag) => !flag);
-			} else {
-				alert("Failed to upload file");
-			}
-		} catch (error) {
-			console.error("Error uploading file:", error);
-			alert("An error occurred while uploading the file");
-		}
-		setIsUploading(false);
-	};
 
 	return (
 		<div>
@@ -109,7 +94,15 @@ function FileUpload({ setReload }) {
 
 						<br />
 					</div>
-					<button onClick={handleUpload}>{isUploading ? "Uploading..." : "Upload"}</button>
+					<button className="upload-btn"
+					// onClick={() => useHandleUpload(selectedFile, setIsUploading, exam, year, round, setReload)}
+					onClick={() => setShowAuthCard(true)}
+					>{isUploading ? "Uploading..." : "Upload"}
+					</button>
+
+					{showAuthCard && 
+						<PasswordVerificationUpload setShowAuthCard={setShowAuthCard} exam={exam} year={year} round={round} setReload={setReload} selectedFile={selectedFile} setIsUploading={setIsUploading}/>
+					}
 				</div>
 			</div>
 		</div>

@@ -4,6 +4,7 @@ import { doSignOut } from "../firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
 import "../Styles/MainPage.css";
+import { TbTriangleFilled } from "react-icons/tb";
 
 function Header() {
   const { currentUser, userLoggedIn, userName } = useAuth();
@@ -17,7 +18,7 @@ function Header() {
 
   function userIconClickHandler(e) {
     let element = e.target;
-    if (!element.closest(".userIcon")) {
+    if (!element.closest(".userIcon") && !element.closest(".themediv")) {
       setShowUserDetails(false);
     }
   }
@@ -51,7 +52,8 @@ function Header() {
             />
           )}
           {showUserDetails && (
-            <div className="flex flex-col absolute z-[10] shadow-md rounded-md p-2 right-0 profile-float">
+            <div className="flex flex-col absolute z-[100] shadow-md rounded-md p-2 right-0 profile-float">
+              <TbTriangleFilled className="w-[40px] h-[35px] absolute right-0 text-white top-[-20px]"/>
               <p className="text-[14px]">
                 {currentUser.displayName || userName}
               </p>

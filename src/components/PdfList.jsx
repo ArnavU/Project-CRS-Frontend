@@ -13,7 +13,7 @@ function PdfList({ setReload, reload }) {
 
 	window.addEventListener('click', (e) => {
 		const element = e.target;
-		if(!element.closest('.verification-form') && !element.closest('.delete-btn')) {
+		if(!element.closest('.verification-form') && !element.closest('.delete-btn') && !element.closest(".themediv")) {
 			setDeletePdfId("");
 		}
 	})
@@ -85,7 +85,7 @@ function PdfList({ setReload, reload }) {
 							View
 						</button>
 
-						{isLoading ? <button>Delete</button> :
+						{isLoading ? <span className="px-[20px] py-[10px] font-semibold text-black cursor-pointer bg-zinc-500 opacity-85 rounded-[15px]">Delete</span> :
 							<button
 								className="delete-pdf-button delete-btn"
 								onClick={() => setDeletePdfId(pdf._id)}
