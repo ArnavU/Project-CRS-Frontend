@@ -3,7 +3,7 @@ import "../Styles/MainPage.css";
 
 const Loader = () => {
   return (
-    <div className="text-center">
+    <div className="text-center loader1">
       <div role="status">
         <svg
           aria-hidden="true"

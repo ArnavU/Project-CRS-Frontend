@@ -22,100 +22,121 @@ const QueryPage = () => {
   const {
     percentile,
     setPercentile,
-    rank, 
+    rank,
     setRank,
-    year, 
+    year,
     setYear,
     category,
     setCategory,
-    round, 
+    round,
     setRound,
     gender,
     setGender,
-    branch, 
+    branch,
     setBranch,
     collegeName,
     setCollegeName,
 
-		qResponse,
-		setQResponse,
-		tempQResponse,
-		setTempQResponse,
-		colleges,
-		setColleges,
-		branches,
-		setBranches,
-		categories,
-		setCategories,
-		yearData,
-		setYearData,
-		yearList,
-		setYearList,
-		selectedYear,
-		setSelectedYear,
-		selectedRound,
-		setSelectedRound,
-		defaultDisplayLimit,
-	} = useContext(QueryContext);
+    qResponse,
+    setQResponse,
+    tempQResponse,
+    setTempQResponse,
+    colleges,
+    setColleges,
+    branches,
+    setBranches,
+    categories,
+    setCategories,
+    yearData,
+    setYearData,
+    yearList,
+    setYearList,
+    selectedYear,
+    setSelectedYear,
+    selectedRound,
+    setSelectedRound,
+    defaultDisplayLimit,
+    setDefaultDisplayLimit,
+  } = useContext(QueryContext);
   const limit = useRef(7);
-  
+
+
+  const limitDecimalPlaces = (value, decimalPlaces) => {
+    value = value.replace(/[^0-9.]/g, "");
+    const decimalIndex = value.indexOf(".");
+
+    if (decimalIndex !== -1) {
+      const decimalPart = value.substring(decimalIndex + 1);
+      value =
+        value.substring(0, decimalIndex + 1) +
+        decimalPart.slice(0, decimalPlaces);
+    }
+
+    // value does not exceed 100
+    if (parseFloat(value) > 100) {
+      value = value[0] + value[1];
+    }
+
+    setPercentile(value);
+  };
+
+  const limitDigits = (value) => {
+    // Regex to remove non-digit characters
+    value = value.replace(/\D/g, "");
+    // Limit to 5 digits
+    setRank(value.slice(0, 5));
+  };
+
   const selectRoundsByYear = (year) => {
-		const round = yearData[year];
-		setSelectedRound(round);
-	};
+    const round = yearData[year];
+    setSelectedRound(round);
+  };
 
   const setCategoryListByYear = (year) => {
     // useGetCategoryList(setCategories, setCategory);
-  }
+  };
 
   // ######################## Submit Handler ########################
   const submitHandler = (e) => {
-		e.preventDefault();
-		setIsLoading(true);
+    e.preventDefault();
+    setIsLoading(true);
     console.log("Query response length: ", qResponse.length);
 
-		// queryString => gender/category/percentile/rank/college/branch/year/round
-		let queryString = `${gender}/${category.toLowerCase()}/${
-			percentile ? percentile : "null"
-		}/${rank ? rank : "null"}/${
-			collegeName || "null"
-		}/${branch}/${selectedYear}/${selectedRound}`;
-		console.log("querystring in QueryPage is  " + queryString);
+    // queryString => gender/category/percentile/rank/college/branch/year/round
+    let queryString = `${gender}/${category.toLowerCase()}/${
+      percentile ? percentile : "null"
+    }/${rank ? rank : "null"}/${
+      collegeName || "null"
+    }/${branch}/${selectedYear}/${selectedRound}`;
+    console.log("querystring in QueryPage is  " + queryString);
 
-		useGetQueryData(
-			queryString,
-			setQResponse,
-			setTempQResponse,
+    useGetQueryData(
+      queryString,
+      setQResponse,
+      setTempQResponse,
       limit,
-			setIsLoading
-		);
-	};
+      setIsLoading
+    );
+  };
 
   useEffect(() => {
     if (!userLoggedIn) {
       navigate("/");
     }
-		useGetBranchList(setBranches);
-		useGetCollegeList(setColleges);
-		useGetCategoryList(setCategories, setCategory);
-		useGetYearList(
-			setYearData,
-			setYearList,
-			setSelectedYear,
-			setSelectedRound
-		);
+    useGetBranchList(setBranches);
+    useGetCollegeList(setColleges);
+    useGetCategoryList(setCategories, setCategory);
+    useGetYearList(setYearData, setYearList, setSelectedYear, setSelectedRound);
   }, []);
 
   return (
     <div className="queryform-div">
       {/* ############## Conditional navigation to mainpage ############## */}
-      {qResponse?.length > 0 && navigate('/mainpage')}
+      {qResponse?.length > 0 && navigate("/mainpage")}
 
       <div className="relative form-container">
         {isLoading && <QueryPageShimmer />}
-        <form
-          onSubmit={submitHandler}
-        >
+        <form onSubmit={submitHandler}>
           <h1 className="heading">Enter Your Details</h1>
           <p id="flash-message" style={{ display: "none", color: "red" }}>
             Please fill Percentile or Rank
@@ -123,13 +144,16 @@ const QueryPage = () => {
 
           <div className="form-row">
             <div className="form-group">
-              <label >Percentile:</label>
+              <label>Percentile:</label>
               <input
                 className="query-input"
                 id="percentile"
                 placeholder="Ex. 87.1234567"
                 value={percentile}
-                onChange={(e) => {setPercentile(e.target.value)}}
+                onChange={(e) => {
+                  // setPercentile(e.target.value);
+                  limitDecimalPlaces(e.target.value, 7);
+                }}
                 // onInput={(event) => {
                 //   clearFlash();
                 //   limitDecimalPlaces(event);
@@ -148,7 +172,10 @@ const QueryPage = () => {
                 id="rank"
                 placeholder="Ex. 5400"
                 value={rank}
-                onChange={(e) => {setRank(e.target.value)}}
+                onChange={(e) => {
+                  // setRank(e.target.value);
+                  limitDigits(e.target.value);
+                }}
                 // onInput={(event) => {
                 //   clearFlash();
                 //   limitDigits(event);
@@ -159,7 +186,7 @@ const QueryPage = () => {
 
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="exam">Select Exam:</label>
+              <label htmlFor="exam">Select Exam Type:</label>
               <select
                 className="query-input"
                 name="exam"
@@ -191,6 +218,7 @@ const QueryPage = () => {
                 step="1"
                 min="1"
                 defaultValue={defaultDisplayLimit}
+                onChange={(e) => {setDefaultDisplayLimit(e.target.value)}}
                 ref={limit}
               />
             </div>
@@ -205,13 +233,15 @@ const QueryPage = () => {
                 name="year"
                 id="year"
                 onChange={(e) => {
-                  setYear(e.target.value)
+                  setYear(e.target.value);
                   selectRoundsByYear(e.target.value);
                   setCategoryListByYear(e.target.value);
                 }}
               >
                 {yearList.map((year) => (
-                  <option key={year} value={year}>{year}</option>
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
                 ))}
               </select>
             </div>
@@ -225,7 +255,10 @@ const QueryPage = () => {
                 className="query-input"
                 name="gender"
                 id="gender"
-                onChange={(e) =>{ setGender(e.target.value); console.log("e.target: ", e.target)}}
+                onChange={(e) => {
+                  setGender(e.target.value);
+                  console.log("e.target: ", e.target);
+                }}
                 // style={{ display: roundVisibility ? "block" : "none" }}
               >
                 <option value="male">Male</option>
@@ -249,7 +282,10 @@ const QueryPage = () => {
                 className="hide query-input"
                 style={{ display: "block" }}
                 // value={round}
-                onChange={(e) => {setRound(e.target.value); console.log("Round: ", e.target.value)}}
+                onChange={(e) => {
+                  setRound(e.target.value);
+                  console.log("Round: ", e.target.value);
+                }}
               >
                 {(() => {
                   let arrOfRounds = [];
@@ -266,7 +302,7 @@ const QueryPage = () => {
                     );
                   });
                 })()}
-					</select>
+              </select>
             </div>
 
             <div className="or-text-transparent">OR</div>
@@ -282,12 +318,13 @@ const QueryPage = () => {
                 className="query-input"
                 id="category"
                 // style={{ display: categoryVisibility ? "block" : "none" }}
-                onChange={(e) => {setCategory(e.target.value)}}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                  console.log(category);
+                }}
               >
                 {categories.map((category) => (
-                  <option key={category}
-                  value={category}
-                  >
+                  <option key={category} value={category}>
                     {category}
                   </option>
                 ))}
@@ -306,7 +343,9 @@ const QueryPage = () => {
               >
                 <option value={"null"}>All branches</option>
                 {branches.map((branchItem) => (
-                  <option key={branchItem} value={branchItem}>{branchItem}</option>
+                  <option key={branchItem} value={branchItem}>
+                    {branchItem}
+                  </option>
                 ))}
               </select>
             </div>
@@ -326,7 +365,9 @@ const QueryPage = () => {
               />
               <datalist id="collegesList">
                 {colleges.map((item, key) => (
-                  <option key={key} value={item}>{item}</option>
+                  <option key={key} value={item}>
+                    {item}
+                  </option>
                 ))}
                 <option>colleges</option>
               </datalist>
@@ -344,13 +385,13 @@ const QueryPage = () => {
             />
 
             <div className="button-container">
-                <button
-                  type="submit"
-                  className="bg-white text-black submit-button hover:shadow-xl hover:text-white transition duration-300 mt-5"
-                  onClick={() => submitHandler}
-                >
-                  GET RESULTS
-                </button>
+              <button
+                type="submit"
+                className="bg-white text-black submit-button hover:shadow-xl hover:text-white transition duration-300 mt-5"
+                onClick={() => submitHandler}
+              >
+                GET RESULTS
+              </button>
             </div>
           </div>
         </form>

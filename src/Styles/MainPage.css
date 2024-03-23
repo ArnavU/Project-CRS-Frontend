@@ -56,6 +56,8 @@
     --navbar-bg-color: black;
     --navbar-fr-color: white;
 
+    --hamburger-bg-color: black;
+
 }
 
 [data-theme="dark"] {
@@ -112,12 +114,11 @@
     --label-color: rgb(255, 255, 255);
 
 
-
-
-
     /* Navbar colors */
     --navbar-bg-color: white;
     --navbar-fr-color: black;
+
+    --hamburger-bg-color: rgb(53, 53, 53);
 }
 
 
@@ -393,7 +394,7 @@ label #btn {
     transition: all .5s ease;
     transform: scale(1.2);
     color: white;
-    background-color: #000000;
+    background-color: var(--hamburger-bg-color);
 
 }
 
@@ -856,13 +857,13 @@ button:focus {
 
 /* ###################################### Loader Css ########################## */
 
-.loader {
+.loader1 {
     width: auto;
-    margin-top: 300px;
+    margin-top: 250px;
 }
 
 
-#check:checked~.loader {
+#check:checked~.loader1 {
     transition-duration: 0.5s;
     margin-left: 420px;
     width: auto;
