@@ -10,14 +10,14 @@ export function QueryProvider({ children }) {
   const [categories, setCategories] = useState([]);
   const [yearData, setYearData] = useState([]);
   const [yearList, setYearList] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(null);
+  const [selectedRoundNos, setSelectedRoundNos] = useState("");
   const [selectedRound, setSelectedRound] = useState(null);
+  const [selectedYear, setSelectedYear] = useState(null);
   const [defaultDisplayLimit, setDefaultDisplayLimit] = useState(7);
   const [percentile, setPercentile] = useState("");
   const [rank, setRank] = useState("");
   const [year, setYear] = useState();
   const [category, setCategory] = useState("");
-  const [round, setRound] = useState();
   const [gender, setGender] = useState("male");
   const [branch, setBranch] = useState("null");
   const [collegeName, setCollegeName] = useState("null");
@@ -31,8 +31,8 @@ export function QueryProvider({ children }) {
     setYear,
     category,
     setCategory,
-    round,
-    setRound,
+    selectedRound,
+    setSelectedRound,
     gender,
     setGender,
     branch,
@@ -58,6 +58,8 @@ export function QueryProvider({ children }) {
     setSelectedYear,
     selectedRound,
     setSelectedRound,
+    selectedRoundNos, // no. of rounds in the year
+    setSelectedRoundNos,
     defaultDisplayLimit,
     setDefaultDisplayLimit,
   };

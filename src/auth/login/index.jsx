@@ -93,10 +93,10 @@ const Login = () => {
             <button
               type="submit"
               disabled={isSigningIn}
-              className={` ${
+              className={` w-full submit-button bg-white ${
                 isSigningIn
                   ? " cursor-not-allowed"
-                  : "bg-white text-black submit-button hover:shadow-xl hover:text-white transition duration-300"
+                  : "bg-white text-black w-full hover:shadow-xl hover:text-white transition duration-300"
               }`}
             >
               {isSigningIn ? "Signing In..." : "Sign In"}

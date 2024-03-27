@@ -19,6 +19,7 @@ const QueryPage = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [errorUserInput, setErrorUserInput] = useState(null);
 
+
   //Data fetched from API
   const {
     percentile,
@@ -29,8 +30,8 @@ const QueryPage = () => {
     setYear,
     category,
     setCategory,
-    round,
-    setRound,
+    selectedRound,
+    setSelectedRound,
     gender,
     setGender,
     branch,
@@ -54,8 +55,8 @@ const QueryPage = () => {
     setYearList,
     selectedYear,
     setSelectedYear,
-    selectedRound,
-    setSelectedRound,
+    selectedRoundNos,
+    setSelectedRoundNos,
     defaultDisplayLimit,
     setDefaultDisplayLimit,
   } = useContext(QueryContext);
@@ -90,7 +91,7 @@ const QueryPage = () => {
 
   const selectRoundsByYear = (year) => {
     const round = yearData[year];
-    setSelectedRound(round);
+    setSelectedRoundNos(round);
   };
 
   const setCategoryListByYear = (year) => {
@@ -130,14 +131,22 @@ const QueryPage = () => {
     if (!userLoggedIn) {
       navigate("/");
     }
-    if(!selectedRound) {
+    if (!selectedRoundNos) {
       useGetBranchList(setBranches);
       useGetCollegeList(setColleges);
-      useGetCategoryList(setCategories, setCategory);
-      useGetYearList(setYearData, setYearList, setSelectedYear, setSelectedRound);
+      useGetCategoryList(categories, setCategories, category, setCategory);
+
+      useGetYearList(
+        setYearData,
+        setYearList,
+        setSelectedYear,
+        setSelectedRoundNos,
+        setSelectedRound,
+      );
     }
-    useGetCategoryList(setCategories, setCategory, selectedYear);
-  }, [selectedRound]);
+    console.log("UseGeteCategoryList running")
+    useGetCategoryList(categories, setCategories, category, setCategory, selectedYear);
+  }, [selectedYear]);
 
   return (
     <div className="queryform-div">
@@ -158,19 +167,19 @@ const QueryPage = () => {
           )}
 
           {errorUserInput &&
-            <div className="mb-[20px]">
-              <p className="text-center font-bold text-red-600">Cannot get the result for the following request: </p>
-              <p className="text-center">
-                {errorUserInput.gender!="null" && <span className="font-bold whitespace-nowrap">Gender: <span className="text-red-600">{gender}</span>,</span>}{" "}
-                {errorUserInput.category && <span className="font-bold whitespace-nowrap">Category: <span className="text-red-600">{category}</span>,</span>}{" "}
-                {errorUserInput.percentile!="null" && <span className="font-bold whitespace-nowrap">Percentile: <span className="text-red-600">{percentile}</span>,</span>}{" "} 
-                {errorUserInput.rank!="null" && <span className="font-bold whitespace-nowrap">Rank: <span className="text-red-600">{rank}</span>,</span>}{" "}
-                {errorUserInput.college!="null" && <span className="font-bold whitespace-nowrap">College: <span className="text-red-600">{collegeName}</span>,</span>}{" "}
-                {errorUserInput.branch!="null" && <span className="font-bold whitespace-nowrap">Branch: <span className="text-red-600">{branch}</span>,</span>}{" "}
-                {errorUserInput.year && <span className="font-bold whitespace-nowrap">Year: <span className="text-red-600">{selectedYear}</span>,</span>}{" "}
-                {errorUserInput.round && <span className="font-bold whitespace-nowrap">Round: <span className="text-red-600">{selectedRound}</span>,</span>}{" "}
-              </p>
-            </div>
+            <div className="mb-[20px] mx-2">
+            <p className="text-center font-bold text-red-600">Cannot get the result for the following request: </p>
+            <p className="text-center">
+              {errorUserInput.gender!="null" && <span className="font-bold whitespace-nowrap">Gender: <span className="text-red-600">{errorUserInput.gender}</span>,</span>}{" "}
+              {errorUserInput.category && <span className="font-bold whitespace-nowrap">Category: <span className="text-red-600">{errorUserInput.category}</span>,</span>}{" "}
+              {errorUserInput.percentile!="null" && <span className="font-bold whitespace-nowrap">Percentile: <span className="text-red-600">{errorUserInput.percentile}</span>,</span>}{" "} 
+              {errorUserInput.rank!="null" && <span className="font-bold whitespace-nowrap">Rank: <span className="text-red-600">{errorUserInput.rank}</span>,</span>}{" "}
+              {errorUserInput.college!="null" && <span className="font-bold whitespace-nowrap">College: <span className="text-red-600">{errorUserInput.college}</span>,</span>}{" "}
+              {errorUserInput.branch!="null" && <span className="font-bold whitespace-nowrap">Branch: <span className="text-red-600">{errorUserInput.branch}</span>,</span>}{" "}
+              {errorUserInput.year && <span className="font-bold whitespace-nowrap">Year: <span className="text-red-600">{errorUserInput.year}</span>,</span>}{" "}
+              {errorUserInput.round && <span className="font-bold whitespace-nowrap">Round: <span className="text-red-600">{errorUserInput.round}</span>,</span>}{" "}
+            </p>
+          </div>
           }
 
           <div className="form-row">
@@ -314,13 +323,13 @@ const QueryPage = () => {
                 style={{ display: "block" }}
                 // value={round}
                 onChange={(e) => {
-                  setRound(e.target.value);
+                  setSelectedRound(e.target.value);
                   console.log("Round: ", e.target.value);
                 }}
               >
                 {(() => {
                   let arrOfRounds = [];
-                  for (let i = 1; i <= selectedRound; i++) {
+                  for (let i = 1; i <= selectedRoundNos; i++) {
                     arrOfRounds.push(i);
                   }
 

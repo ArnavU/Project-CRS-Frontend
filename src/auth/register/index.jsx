@@ -16,7 +16,7 @@ const Register = () => {
 
   useEffect(() => {
     if (userLoggedIn) {
-      navigate("/mainPage");
+      navigate("/querypage");
     }
   });
 
@@ -47,7 +47,7 @@ const Register = () => {
           return;
         }
         setUserName(email);
-        navigate("/mainPage");
+        navigate("/querypage");
       } else {
         setErrorMessage("Password mismatch!");
         setIsRegistering(false);
@@ -58,7 +58,7 @@ const Register = () => {
 
   return (
     <>
-      {userLoggedIn && <Navigate to={""} replace={true} />}
+      {userLoggedIn && <Navigate to={"/querypage"} replace={true} />}
 
       <main className="w-full h-screen flex self-center place-content-center place-items-center">
         <div className=" w-96 text-gray-600 space-y-5 p-4 rounded-xl">
@@ -125,7 +125,7 @@ const Register = () => {
             <button
               type="submit"
               disabled={isRegistering}
-              className={`w-full px-4 py-2 text-white font-medium rounded-lg ${
+              className={`w-full px-4 py-2  font-medium rounded-lg ${
                 isRegistering
                   ? "bg-gray-300 cursor-not-allowed"
                   : "bg-white text-black submit-button hover:shadow-xl hover:text-white transition duration-300"

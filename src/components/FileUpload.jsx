@@ -9,13 +9,23 @@ import PasswordVerificationUpload from "./PasswordVerificationUpload";
 function FileUpload({ setReload }) {
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [exam, setExam] = useState("cet");
-	const [year, setYear] = useState("");
-	const [round, setRound] = useState("");
+	const [year, setYear] = useState(null);
+	const [round, setRound] = useState(null);
 	const [isUploading, setIsUploading] = useState(false);
 	const [showAuthCard, setShowAuthCard] = useState(false);
 
-	if(showAuthCard && !selectedFile) {
-			alert("Please select a file");
+	if(showAuthCard && (!selectedFile || !year || !round)) {
+			let message = "";
+			if(!selectedFile) {
+				message = "Please select a file";
+			}
+			else if(!year) {
+				alert("Please provide year");
+			}
+			else if(!round) {
+				alert("Please provide round");
+			}
+			alert(message);
 			setShowAuthCard(false);
 	}
 
@@ -81,6 +91,7 @@ function FileUpload({ setReload }) {
 						<input
 							type="text"
 							placeholder="Year"
+							required={true}
 							value={year}
 							onChange={handleYearChange}
 						/>
@@ -88,6 +99,7 @@ function FileUpload({ setReload }) {
 						<input
 							type="text"
 							placeholder="Round"
+							required={true}
 							value={round}
 							onChange={handleRoundChange}
 						/>

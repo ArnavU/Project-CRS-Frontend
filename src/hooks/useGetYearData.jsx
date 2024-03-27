@@ -36,7 +36,8 @@ const useGetYearList = async (
   setYearDataList,
   setYearList,
   setSelectedYear,
-  setSelectedRound
+  setSelectedRoundNos,
+  setSelectedRound,
 ) => {
   const response = await fetch(YEAR_LIST);
 
@@ -58,7 +59,8 @@ const useGetYearList = async (
   console.log("Selected Round: ", yearsData[yearList[0]])
 
   setSelectedYear(yearList[0]); // Select the first year (which will be the latest now)
-  setSelectedRound(yearsData[yearList[0]]);
+  setSelectedRoundNos(yearsData[yearList[0]]);
+  setSelectedRound(1);
 };
 
 export default useGetYearList;

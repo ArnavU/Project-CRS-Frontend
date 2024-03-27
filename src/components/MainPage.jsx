@@ -22,6 +22,7 @@ const MainPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [errorUserInput, setErrorUserInput] = useState(null);
 
+
   const {
     percentile,
     setPercentile,
@@ -31,8 +32,8 @@ const MainPage = () => {
     setYear,
     category,
     setCategory,
-    round,
-    setRound,
+    selectedRound,
+    setSelectedRound,
     gender,
     setGender,
     branch,
@@ -56,8 +57,8 @@ const MainPage = () => {
     setYearList,
     selectedYear,
     setSelectedYear,
-    selectedRound, // no. of rounds in the year
-    setSelectedRound,
+    selectedRoundNos, // no. of rounds in the year
+    setSelectedRoundNos,
     defaultDisplayLimit,
 	  setDefaultDisplayLimit,
   } = useContext(QueryContext);
@@ -110,6 +111,7 @@ const MainPage = () => {
     }/${rank ? rank : "null"}/${
       collegeName || "null"
     }/${branch}/${selectedYear}/${selectedRound}`;
+
     console.log("querystring is  " + queryString);
 
     useGetQueryData(
@@ -135,7 +137,7 @@ const MainPage = () => {
   const selectRoundsByYear = (year) => {
     // console.log(year);
     const round = yearData[year];
-    setSelectedRound(round);
+    setSelectedRoundNos(round);
     // console.log("Round: ", round);
   };
 
@@ -143,20 +145,22 @@ const MainPage = () => {
     if (!userLoggedIn) {
       navigate("/");
     }
-    if (!selectedRound) {
+    if (!selectedRoundNos) {
       useGetBranchList(setBranches);
       useGetCollegeList(setColleges);
-      useGetCategoryList(setCategories, setCategory);
+      useGetCategoryList(categories, setCategories, category, setCategory);
 
       useGetYearList(
         setYearData,
         setYearList,
         setSelectedYear,
-        setSelectedRound
+        setSelectedRoundNos,
+        setSelectedRound,
       );
     }
-    useGetCategoryList(setCategories, setCategory, selectedYear);
-  }, [selectedRound]);
+    console.log("UseGeteCategoryList running")
+    useGetCategoryList(categories, setCategories, category, setCategory, selectedYear);
+  }, [selectedYear]);
 
   return (
     <div className="maindiv">
@@ -294,7 +298,7 @@ const MainPage = () => {
             name="category"
             className="hide query-input"
             style={{ display: "block" }}
-            defaultValue={category}
+            value={category}
             onChange={(e) => {
               console.log(category);
               setCategory(e.target.value);
@@ -320,13 +324,12 @@ const MainPage = () => {
             id="round"
             className="hide query-input"
             style={{ display: "block" }}
-            value={round}
-            onChange={(e) => setRound(e.target.value)}
+            value={selectedRound}
+            onChange={(e) => setSelectedRound(e.target.value)}
           >
             {(() => {
               let arrOfRounds = [];
-              for (let i = 1; i <= selectedRound; i++) {
-                console.log("Round from mainpage: ", round);
+              for (let i = 1; i <= selectedRoundNos; i++) {
                 arrOfRounds.push(i);
               }
 
@@ -417,14 +420,14 @@ const MainPage = () => {
             <div className="mb-[20px] mx-2">
               <p className="text-center font-bold text-red-600">Cannot get the result for the following request: </p>
               <p className="text-center">
-                {errorUserInput.gender!="null" && <span className="font-bold whitespace-nowrap">Gender: <span className="text-red-600">{gender}</span>,</span>}{" "}
-                {errorUserInput.category && <span className="font-bold whitespace-nowrap">Category: <span className="text-red-600">{category}</span>,</span>}{" "}
-                {errorUserInput.percentile!="null" && <span className="font-bold whitespace-nowrap">Percentile: <span className="text-red-600">{percentile}</span>,</span>}{" "} 
-                {errorUserInput.rank!="null" && <span className="font-bold whitespace-nowrap">Rank: <span className="text-red-600">{rank}</span>,</span>}{" "}
-                {errorUserInput.college!="null" && <span className="font-bold whitespace-nowrap">College: <span className="text-red-600">{collegeName}</span>,</span>}{" "}
-                {errorUserInput.branch!="null" && <span className="font-bold whitespace-nowrap">Branch: <span className="text-red-600">{branch}</span>,</span>}{" "}
-                {errorUserInput.year && <span className="font-bold whitespace-nowrap">Year: <span className="text-red-600">{selectedYear}</span>,</span>}{" "}
-                {errorUserInput.round && <span className="font-bold whitespace-nowrap">Round: <span className="text-red-600">{selectedRound}</span>,</span>}{" "}
+                {errorUserInput.gender!="null" && <span className="font-bold whitespace-nowrap">Gender: <span className="text-red-600">{errorUserInput.gender}</span>,</span>}{" "}
+                {errorUserInput.category && <span className="font-bold whitespace-nowrap">Category: <span className="text-red-600">{errorUserInput.category}</span>,</span>}{" "}
+                {errorUserInput.percentile!="null" && <span className="font-bold whitespace-nowrap">Percentile: <span className="text-red-600">{errorUserInput.percentile}</span>,</span>}{" "} 
+                {errorUserInput.rank!="null" && <span className="font-bold whitespace-nowrap">Rank: <span className="text-red-600">{errorUserInput.rank}</span>,</span>}{" "}
+                {errorUserInput.college!="null" && <span className="font-bold whitespace-nowrap">College: <span className="text-red-600">{errorUserInput.college}</span>,</span>}{" "}
+                {errorUserInput.branch!="null" && <span className="font-bold whitespace-nowrap">Branch: <span className="text-red-600">{errorUserInput.branch}</span>,</span>}{" "}
+                {errorUserInput.year && <span className="font-bold whitespace-nowrap">Year: <span className="text-red-600">{errorUserInput.year}</span>,</span>}{" "}
+                {errorUserInput.round && <span className="font-bold whitespace-nowrap">Round: <span className="text-red-600">{errorUserInput.round}</span>,</span>}{" "}
               </p>
             </div>
           }
