@@ -21,6 +21,8 @@ export function QueryProvider({ children }) {
   const [gender, setGender] = useState("male");
   const [branch, setBranch] = useState("null");
   const [collegeName, setCollegeName] = useState("null");
+  const [universities, setUniversities] = useState([]);
+  const [selectedUniversity, setSelectedUniversity] = useState('null');
 
   const value = {
     percentile,
@@ -39,6 +41,10 @@ export function QueryProvider({ children }) {
     setBranch,
     collegeName,
     setCollegeName,
+    universities,
+    setUniversities,
+    selectedUniversity,
+    setSelectedUniversity,
 
     qResponse,
     setQResponse,
