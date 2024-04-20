@@ -562,6 +562,7 @@ const MainPage = () => {
 								<th>Cutoff</th>
 								<th>Course Name</th>
 								<th>Exam</th>
+								<th>Link</th>
 							</tr>
 
 							{tempQResponse.map((CollegeInfo, index) => (
@@ -572,6 +573,7 @@ const MainPage = () => {
 									<td>{CollegeInfo.percentile}</td>
 									<td>{CollegeInfo.course}</td>
 									<td>MHT-CET</td>
+									<td><a href={CollegeInfo.hyperLink}>Link</a></td>
 								</tr>
 							))}
 						</tbody>
