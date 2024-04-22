@@ -121,6 +121,10 @@
     --hamburger-bg-color: rgb(53, 53, 53);
 }
 
+body {
+    font-family: "Poppins";
+}
+
 
 
 
@@ -209,6 +213,7 @@
 /* Table styles */
 table {
     margin: 0px 100px;
+    margin-left: 150px;
     border-collapse: collapse;
     box-shadow: var(--shadow);
     background-color: var(--table-border-color);
@@ -565,7 +570,7 @@ label #cancel {
 
 .form-container {
     box-sizing: border-box;
-    font-family: serif;
+    /* font-family: serif; */
     background: var(--file-upload-div-color);
     margin: auto;
     /* min-height: 100vh; */
@@ -835,6 +840,7 @@ button:focus {
     margin: 5px;
     z-index: 100;
 
+
 }
 
 .profile-float {
@@ -853,6 +859,10 @@ button:focus {
 .profile-float p {
     /* color: rgb(255, 255, 255); */
     color: rgb(0, 0, 0);
+}
+
+.CRS-name {
+    border-bottom: 2px solid #3d3d3d;
 }
 
 

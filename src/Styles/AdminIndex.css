@@ -132,6 +132,7 @@ body {
   background-color: var(--body-bg-color);
   transition: 0.2s;
   animation-duration: 0.2s;
+  font-family: "Poppins";
 }
 
 .screen-div {

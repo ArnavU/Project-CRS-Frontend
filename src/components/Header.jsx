@@ -33,7 +33,7 @@ function Header() {
 
   return (
     <div className="flex flex-row justify-between px-2 py-2 nav-panel-header">
-      <h2 onClick={toggleUserDetails} className="px-3">
+      <h2 onClick={toggleUserDetails} className="px-3 CRS-name">
         CRS
       </h2>
       {userLoggedIn && (

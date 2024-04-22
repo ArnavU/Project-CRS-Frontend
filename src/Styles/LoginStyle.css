@@ -5,6 +5,10 @@
     transition-delay: 0.05s;
 }
 
+body {
+    font-family: "Poppins";
+}
+
 .login-button-class:hover {
     background: #00fff7a7;
     color: black;
