@@ -213,7 +213,7 @@ body {
 /* Table styles */
 table {
     margin: 0px 100px;
-    margin-left: 150px;
+    margin-left: 200px;
     border-collapse: collapse;
     box-shadow: var(--shadow);
     background-color: var(--table-border-color);
