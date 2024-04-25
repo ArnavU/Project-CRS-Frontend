@@ -269,7 +269,9 @@ const QueryPage = () => {
               />
             </div>
 
-            <div className="or-text pt-[20px]">OR</div>
+            <div className="or-text pt-[20px]">
+              OR<span style={{ color: "red" }}>*</span>
+            </div>
 
             <div className="form-group">
               <label htmlFor="rank">Rank:</label>
