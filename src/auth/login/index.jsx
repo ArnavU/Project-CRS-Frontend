@@ -47,7 +47,7 @@ const Login = () => {
       {userLoggedIn && <Navigate to={"/querypage"} replace={true} />}
 
       <main className=" w-full h-screen flex self-center place-content-center place-items-center">
-        <div className="login-form-div w-96 text-gray-600 space-y-5 p-4 shadow-xl border rounded-xl">
+        <div className="login-form-div w-96 text-white space-y-5 p-4 shadow-xl border rounded-xl">
           <div className="text-center">
             <div className="mt-2">
               <h3 className=" text-xl font-semibold sm:text-2xl loginHeading">
@@ -68,7 +68,7 @@ const Login = () => {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
-                className="bg-zinc-300 w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+                className="bg-zinc-300 w-full mt-2 px-3 py-2 text-white bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
               />
             </div>
             <div>
@@ -83,7 +83,7 @@ const Login = () => {
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
-                className="bg-zinc-300 w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+                className="bg-zinc-300 w-full mt-2 px-3 py-2 text-white bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
               />
             </div>
             {errorMessage && (
