@@ -177,14 +177,6 @@ const MainPage = () => {
 
   return (
     <div className="maindiv">
-      <button
-        className="absolute right-1 top-20 p-2 rounded-md bg-white admin-button"
-        onClick={() => {
-          navigate("/Admin");
-        }}
-      >
-        Admin
-      </button>
       <input type="checkbox" id="check" checked={showSidebar} />
 
       <label htmlFor="check">

@@ -16,6 +16,7 @@ export function AuthProvider({ children }) {
 	const [isGoogleUser, setIsGoogleUser] = useState(false);
 	const [loading, setLoading] = useState(true);
 	const [userName, setUserName] = useState(null);
+	const [userPassword, setUserPassword] = useState(null);
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, initializeUser);
@@ -56,7 +57,9 @@ export function AuthProvider({ children }) {
 		currentUser,
 		setCurrentUser,
 		userName, 
-		setUserName
+		setUserName, 
+		userPassword,
+		setUserPassword,
 	};
 
 	return (
