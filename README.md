@@ -7,4 +7,5 @@ Go to vs code and type following commands in terminal
 2. npm install
 3. npm run dev
 
-On localhost://portNo. you will find this web application Running
+On localhost://portNo. you will find this web application running
+
