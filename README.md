@@ -1,8 +1,20 @@
-College Recommendation System
+**College Recommendation System**
 
 
-Go to vs code and type following commands in terminal
- 
+
+#Technologies used:
+* React JS
+* Node JS
+* Express JS
+* MongoDB
+* Python
+* Vite
+* Firebase
+* Tailwind
+
+# Steps to run this project on your local computer:
+
+- Go to vs code and type following commands in terminal
 1. git clone https://github.com/ArnavU/Project-CRS-Frontend.git
 2. npm install
 3. npm run dev
