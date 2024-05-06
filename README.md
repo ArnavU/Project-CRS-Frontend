@@ -14,7 +14,20 @@
 
 # Steps to run this project on your local computer:
 
-- Go to vs code and type following commands in terminal
+-Install VS Code on your device from the given link : https://code.visualstudio.com/download
+
+-Install git from the given link 
+   --for windows: https://git-scm.com/download/win
+
+   --for Linux: https://git-scm.com/download/linux
+
+
+-Download Node from the given link: https://nodejs.org/en/download
+
+
+
+
+- Open vs code and type following commands in terminal
 1. git clone https://github.com/ArnavU/Project-CRS-Frontend.git
 2. npm install
 3. npm run dev
