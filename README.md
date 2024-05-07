@@ -30,8 +30,9 @@
 
 * Open vs code and type following commands in terminal
 1. git clone https://github.com/ArnavU/Project-CRS-Frontend.git
-2. npm install
-3. npm run dev
+2. Add .env file to base directory (for confidentiality the .env file is not included in repository, you have to ask for it to the developers of this project by contacting through email)
+3. npm install
+4. npm run dev
 
 On localhost://portNo. you will find this web application running
 
