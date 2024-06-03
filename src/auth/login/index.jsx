@@ -8,7 +8,7 @@ import { useAuth } from "../../contexts/authContext";
 import "../../Styles/MainPage.css";
 
 const Login = () => {
-  const { userLoggedIn, setUserName } = useAuth();
+  const { userLoggedIn, setUserName, setUserPassword, userPassword } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +23,7 @@ const Login = () => {
         email,
         password
       );
+      setUserPassword(password);
       setErrorMessage("Invalid Credentials");
       setIsSigningIn(false);
       // doSendEmailVerification()

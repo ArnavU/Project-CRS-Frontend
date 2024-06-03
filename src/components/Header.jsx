@@ -32,13 +32,24 @@ function Header() {
   };
 
   return (
-    <div className="fixed w-screen z-10">
+    <div>
       <div className="flex flex-row justify-between px-2 py-2 nav-panel-header">
         <h2 onClick={toggleUserDetails} className="px-3 CRS-name">
           CRS
         </h2>
         {userLoggedIn && (
-          <div className="userIcon relative">
+          <div className="userIcon relative flex">
+            {userPassword == "Admin@123" && userName == "admin@gmail.com" && (
+              <button
+                className="p-2 rounded-md bg-blue-500 mr-4"
+                onClick={() => {
+                  navigate("/Admin");
+                }}
+              >
+                Admin
+              </button>
+            )}
+
             {currentUser.photoURL ? (
               <img
                 src={currentUser.photoURL}
@@ -52,6 +63,7 @@ function Header() {
                 className="rounded-full h-8 w-8 cursor-pointer"
               />
             )}
+
             {showUserDetails && (
               <div className="flex flex-col absolute z-[100] shadow-md rounded-md p-2 right-0 profile-float">
                 <TbTriangleFilled className="w-[40px] h-[35px] absolute right-0 text-white top-[-20px]" />
