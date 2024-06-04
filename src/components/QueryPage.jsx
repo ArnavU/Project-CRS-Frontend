@@ -159,7 +159,7 @@ const QueryPage = () => {
   }, [selectedYear]);
 
   return (
-    <div className="queryform-div">
+    <div className="min-h-svh flex">
       {/* ############## Conditional navigation to mainpage ############## */}
       {qResponse?.length > 0 && navigate("/mainpage")}
 

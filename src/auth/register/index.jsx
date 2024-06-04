@@ -61,7 +61,7 @@ const Register = () => {
       {userLoggedIn && <Navigate to={"/querypage"} replace={true} />}
 
       <main className="w-full h-screen flex self-center place-content-center place-items-center">
-        <div className=" w-96 text-gray-600 space-y-5 p-4 rounded-xl">
+        <div className=" w-96  space-y-5 p-4 rounded-xl">
           <div className="text-center mb-6">
             <div className="mt-2">
               <h3 className="loginHeading text-xl font-semibold sm:text-2xl">
@@ -69,9 +69,12 @@ const Register = () => {
               </h3>
             </div>
           </div>
-          <form onSubmit={onSubmit} className="login-form-div space-y-4">
+          <form
+            onSubmit={onSubmit}
+            className="login-form-div space-y-4 hover:shadow-2xl transition-all"
+          >
             <div>
-              <label className="text-sm text-gray-600 font-bold">Email</label>
+              <label className="text-sm font-bold">Email</label>
               <input
                 type="email"
                 autoComplete="email"
@@ -85,9 +88,7 @@ const Register = () => {
             </div>
 
             <div>
-              <label className="text-sm text-gray-600 font-bold">
-                Password
-              </label>
+              <label className="text-sm  font-bold">Password</label>
               <input
                 disabled={isRegistering}
                 type="password"
@@ -102,9 +103,7 @@ const Register = () => {
             </div>
 
             <div>
-              <label className="text-sm text-gray-600 font-bold">
-                Confirm Password
-              </label>
+              <label className="text-sm font-bold">Confirm Password</label>
               <input
                 disabled={isRegistering}
                 type="password"
@@ -133,7 +132,7 @@ const Register = () => {
             >
               {isRegistering ? "Signing Up..." : "Sign Up"}
             </button>
-            <div className="text-sm text-center">
+            <div className="text-sm text-center labels-for-inputs ">
               Already have an account? {"   "}
               <Link
                 to={"/"}

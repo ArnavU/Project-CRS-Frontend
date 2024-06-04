@@ -8,7 +8,8 @@ import { useAuth } from "../../contexts/authContext";
 import "../../Styles/MainPage.css";
 
 const Login = () => {
-  const { userLoggedIn, setUserName, setUserPassword, userPassword } = useAuth();
+  const { userLoggedIn, setUserName, setUserPassword, userPassword } =
+    useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,7 +49,7 @@ const Login = () => {
       {userLoggedIn && <Navigate to={"/querypage"} replace={true} />}
 
       <main className=" w-full h-screen flex self-center place-content-center place-items-center">
-        <div className="login-form-div w-96 text-white space-y-5 p-4 shadow-xl border rounded-xl">
+        <div className="login-form-div w-96 text-white space-y-5 p-4 shadow-xl border rounded-3xl px-10 hover:shadow-2xl transition-all">
           <div className="text-center">
             <div className="mt-2">
               <h3 className=" text-xl font-semibold sm:text-2xl loginHeading">
@@ -111,7 +112,7 @@ const Login = () => {
           </p>
           <div className="flex flex-row text-center w-full">
             <div className="border-b-2 mb-2.5 mr-2 w-full"></div>
-            <div className="text-sm font-bold w-fit">OR</div>
+            <div className="text-sm font-bold w-fit labels-for-inputs">OR</div>
             <div className="border-b-2 mb-2.5 ml-2 w-full"></div>
           </div>
           <button
@@ -119,10 +120,10 @@ const Login = () => {
             onClick={(e) => {
               onGoogleSignIn(e);
             }}
-            className={`w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium with-google-div ${
+            className={`w-full flex items-center justify-center gap-x-3 py-2.5 border text-sm font-medium with-google-div text-black rounded-2xl  ${
               isSigningIn
                 ? "cursor-not-allowed"
-                : "hover:bg-gray-100 transition duration-300 active:bg-gray-100"
+                : "hover:bg-gray-300 transition duration-300 active:bg-gray-100"
             }`}
           >
             <svg

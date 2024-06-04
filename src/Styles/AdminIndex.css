@@ -11,7 +11,7 @@
 
 :root {
   /* body colors */
-  --body-bg-color: #00ffff;
+  --body-bg-color: linear-gradient(90deg, #A1C4FD, #C2E9FB);
   --file-background-color: #00fff700;
   --heading-color: #001a1a;
   --form-background-color: #f7f7f7;
@@ -50,7 +50,7 @@
 [data-theme="dark"] {
 
   /* body colors */
-  --body-bg-color: #000000;
+  --body-bg-color: linear-gradient(45deg, #333, #111);
   --file-background-color: #000000;
   --heading-color: #ffffff;
   --form-background-color: #f7f7f7;
@@ -106,6 +106,9 @@
   color: var(--exam-label-color);
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
 
 /* ::-webkit-scrollbar {
@@ -129,14 +132,14 @@
 } */
 
 body {
-  background-color: var(--body-bg-color);
+  background-image: var(--body-bg-color);
   transition: 0.2s;
   animation-duration: 0.2s;
   font-family: "Poppins";
 }
 
 .screen-div {
-  font-size: 1.1rem;
+  font-size: 1.04rem;
   height: 100vh;
   margin: auto;
   background: var(--file-background-color);
@@ -266,13 +269,13 @@ input::file-selector-button {
   flex-wrap: wrap;
   /* margin: 5px; */
   justify-content: space-evenly;
-  padding-right: 25px;
+  /* padding-right: 25px; */
 }
 
 .pdf-card {
   font-size: 1.3rem;
   margin-top: 25px;
-  margin-left: 25px;
+  /* margin-left: 25px; */
   background: var(--file-upload-div-color);
   padding: 20px;
   border-radius: 20px;
@@ -385,13 +388,13 @@ input::file-selector-button {
   flex-wrap: wrap;
   /* margin: 5px; */
   justify-content: space-evenly;
-  padding-right: 25px;
+  /* padding-right: 25px; */
 }
 
 .pdf-card-shimmer {
   margin-top: 25px;
-  margin-left: 25px;
-  margin-bottom: 25px;
+  /* margin-left: 25px; */
+  /* margin-bottom: 25px; */
   background: linear-gradient(-45deg, #d1d1d11c, #ffffff7c, #d1d1d11c);
   padding: 20px;
   border-radius: 20px;

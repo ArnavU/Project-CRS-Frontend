@@ -4,7 +4,7 @@
 
 :root {
     /* body colors */
-    --body-bg-color: #00ffff;
+    --body-bg-color: linear-gradient(90deg, #A1C4FD, #C2E9FB);
     --file-background-color: #00fff700;
     --heading-color: #001a1a;
     --form-background-color: #f7f7f7;
@@ -57,6 +57,7 @@
     --navbar-fr-color: white;
 
     --hamburger-bg-color: black;
+    --bg-sidebar-for-sm: linear-gradient(90deg, #758eb6, #7eafc4);
 
 }
 
@@ -119,10 +120,15 @@
     --navbar-fr-color: black;
 
     --hamburger-bg-color: rgb(53, 53, 53);
+    --bg-sidebar-for-sm: linear-gradient(90deg, #A1C4FD, #C2E9FB);
 }
 
 body {
     font-family: "Poppins";
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 
@@ -316,7 +322,7 @@ select {
     background-color: rgb(1 1 1 / 43%);
     border-radius: 10px;
     border: none;
-    font-size: 1.1rem;
+    font-size: 1.04rem;
 }
 
 /* Mainpage Button styles */
@@ -347,7 +353,7 @@ select {
     top: 51px;
     left: -450px;
     max-width: 420px;
-    min-height: 90%;
+    min-height: auto;
     transition: all 0.5s ease;
     margin: 6px;
     z-index: 20;
@@ -358,6 +364,23 @@ select {
     margin-top: 8px;
     backdrop-filter: blur(200px);
     box-shadow: var(--shadow);
+}
+
+@media (max-width: 500px) {
+    .sidebar {
+        background: var(--bg-sidebar-for-sm);
+        backdrop-filter: blur(0px);
+        min-height: 90%;
+
+    }
+
+    .sidebar>form>label {
+        color: black;
+    }
+
+    .sidebar>form>div>div>label {
+        color: black;
+    }
 }
 
 
@@ -604,7 +627,7 @@ select {
     background-color: var(--ip-or-select-bg-color);
     border-radius: 10px;
     border: none;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .hide {
