@@ -69,8 +69,8 @@ const Login = () => {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
-                className="bg-zinc-300 w-full mt-2 px-3 py-2 text-white bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
-              />
+                className="bg-zinc-400 w-full mt-2 px-3 py-2 text-white bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+              />  
             </div>
             <div>
               <label className="labels-for-inputs text-sm font-bold">
@@ -110,16 +110,16 @@ const Login = () => {
             </Link>
           </p>
           <div className="flex flex-row text-center w-full">
-            <div className="border-b-2 mb-2.5 mr-2 w-full"></div>
-            <div className="text-sm font-bold w-fit">OR</div>
-            <div className="border-b-2 mb-2.5 ml-2 w-full"></div>
+            <div className="border-b-2 mb-2.5 mr-2 or-border w-full"></div>
+            <p className="text-sm font-bold ">OR</p>
+            <div className="border-b-2 mb-2.5 ml-2 or-border w-full"></div>
           </div>
           <button
             disabled={isSigningIn}
             onClick={(e) => {
               onGoogleSignIn(e);
             }}
-            className={`w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium with-google-div ${
+            className={`w-full flex items-center justify-center gap-x-3 py-2.5 text-black border rounded-lg text-sm font-medium with-google-div ${
               isSigningIn
                 ? "cursor-not-allowed"
                 : "hover:bg-gray-100 transition duration-300 active:bg-gray-100"
