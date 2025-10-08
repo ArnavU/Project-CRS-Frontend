@@ -63,7 +63,7 @@ function Header() {
 					)}
 
 					{showUserDetails && (
-						<div className="flex flex-col absolute z-[100] shadow-md rounded-md p-2 right-0 profile-float">
+						<div className="flex flex-col absolute top-[100%] z-[100] shadow-md rounded-md p-2 right-0 profile-float">
 							<TbTriangleFilled className="w-[40px] h-[35px] absolute right-0 text-white top-[-20px]" />
 							<p className="text-[14px]">
 								{currentUser.displayName || userName}
